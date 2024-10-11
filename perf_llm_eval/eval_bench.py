@@ -4,14 +4,16 @@ import os
 import argparse
 import logging
 import dotenv
-from lm_eval.evaluator import simple_evaluate
-from lm_eval.tasks import TaskManager  # type: ignore
 
 logger = logging.getLogger(__name__)
 
 dotenv.load_dotenv()
 
 def exec_lm_eval(tasks, model, endpoint, **kwargs):
+
+    # Avoid importing these until we want to exec
+    from lm_eval.evaluator import simple_evaluate
+    from lm_eval.tasks import TaskManager  # type: ignore
 
     model_args = dict(
         model = model,
