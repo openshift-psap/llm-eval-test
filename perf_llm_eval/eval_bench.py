@@ -24,8 +24,8 @@ def exec_lm_eval(tasks, model, endpoint, **kwargs):
         tokenized_requests=False
     )
 
-    model_args_str = ','.join([f"{k}={repr(v)}" for k,v in model_args.items()])
-    tm = TaskManager(verbosity="DEBUG", include_path=kwargs['tasks_path'])
+    model_args_str = ','.join([f"{k}={str(v)}" for k,v in model_args.items()])
+    tm = TaskManager(include_path=kwargs['tasks_path'])
 
     results = simple_evaluate(
         model="local-completions",
