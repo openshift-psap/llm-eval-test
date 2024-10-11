@@ -65,18 +65,27 @@ def eval_cli():
     logging.basicConfig(level=logging.INFO)
     parser = argparse.ArgumentParser(
                     description='Helper script for running PSAP relevent LLM benchmarks.',
-                    epilog='')
+                    epilog='',
+                    formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
 
     local_dir = os.path.dirname(__file__)
     work_dir = os.getcwd()
 
-    parser.add_argument('--catalog_path',
+    def dir_path(path: str) -> str:
+        ''' Typecheck for directory '''
+        if os.path.isdir(path):
+            return os.path.abspath(path)
+        else:
+            raise NotADirectoryError(path)
+
+    parser.add_argument('--catalog_path', type=dir_path,
                         default=f"{local_dir}/lm_eval/catalog",
                         help="unitxt catalog directory")
-    parser.add_argument('--tasks_path',
+    parser.add_argument('--tasks_path', type=dir_path,
                         default=f"{local_dir}/lm_eval/tasks",
                         help="unitxt catalog directory")
-    parser.add_argument('--datasets', '-d', required=True,
+    parser.add_argument('--datasets', '-d', type=dir_path, required=True,
                         default=f"{work_dir}/datasets",
                         help="path to dataset storage")
     parser.add_argument('--endpoint', '-H', required=True,
@@ -129,6 +138,7 @@ def eval_cli():
 
         # Call wrapped lm-eval
         exec_lm_eval(**vars(args))
+
 
 if __name__ == '__main__':
     eval_cli()
