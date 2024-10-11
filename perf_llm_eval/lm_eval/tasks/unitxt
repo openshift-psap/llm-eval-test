@@ -1,1 +1,1 @@
-class: !function /home/smonson/lm-evaluation-harness/lm_eval/tasks/unitxt/task.Unitxt
+class: !function task.Unitxt
