@@ -3,6 +3,7 @@
 import os
 import argparse
 import logging
+import tempfile
 import dotenv
 
 logger = logging.getLogger(__name__)
@@ -66,17 +67,18 @@ def eval_cli():
                     description='Helper script for running PSAP relevent LLM benchmarks.',
                     epilog='')
 
-    local_dir = f"{os.path.dirname(__file__)}/lm_eval"
+    local_dir = os.path.dirname(__file__)
+    work_dir = os.getcwd()
+
     parser.add_argument('--catalog_path',
-                        default=f"{local_dir}/catalog",
+                        default=f"{local_dir}/lm_eval/catalog",
                         help="unitxt catalog directory")
     parser.add_argument('--tasks_path',
-                        default=f"{local_dir}/tasks",
+                        default=f"{local_dir}/lm_eval/tasks",
                         help="unitxt catalog directory")
-    cache_dir = os.environ.get("XDG_CACHE_DIR", f"{os.environ['HOME']}/.cache")
-    parser.add_argument('--cache_path',
-                        default=f"{cache_dir}/huggingface_eval",
-                        help="cache directory")
+    parser.add_argument('--datasets', '-d', required=True,
+                        default=f"{work_dir}/datasets",
+                        help="path to dataset storage")
     parser.add_argument('--endpoint', '-H', required=True,
                         default='http://127.0.0.1:8000/v1/completions',
                         help='OpenAI API-compatible endpoint')
@@ -101,9 +103,6 @@ def eval_cli():
     ## will redownload the catalog each run
     os.environ["UNITXT_USE_ONLY_LOCAL_CATALOGS"] = "True"
 
-    ## Set our own HF_HOME for dataset (and unitxt) storage
-    os.environ["HF_HOME"] = args.cache_path
-
     ##
     os.environ["UNITXT_ARTIFACTORIES"] = args.catalog_path
 
@@ -111,7 +110,25 @@ def eval_cli():
 
     logger.info("Called with " + str(vars(args)))
 
-    exec_lm_eval(**vars(args))
+    # HACK: Working from a temporary directory allows us to load hf datasets
+    # from disk because the dataset and evaluate libraries search the local
+    # path first. Since Unitxt is loaded as a dataset, we also provide wrappers
+    # that point to the local python package.
+    with tempfile.TemporaryDirectory() as tmpdir:
+        os.chdir(tmpdir)
+        logger.info(f"Working from {tmpdir}")
+
+        # Symlink unitxt wrappers to working directory
+        os.symlink(f"{local_dir}/unitxt", f"{tmpdir}/unitxt")
+
+        # Symlink datasets to working directory
+        for dataset in os.listdir(args.datasets):
+            if dataset == 'unitxt':
+                continue # TODO Handle this better
+            os.symlink(f"{args.datasets}/{dataset}", f"{tmpdir}/{dataset}")
+
+        # Call wrapped lm-eval
+        exec_lm_eval(**vars(args))
 
 if __name__ == '__main__':
     eval_cli()
