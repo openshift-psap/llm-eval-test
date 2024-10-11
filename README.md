@@ -25,7 +25,7 @@ python -m venv venv
 source venv/bin/activate
 
 # Install the package
-pip install https://github.com/sjmonson/perf-llm-eval.git
+pip install git+https://github.com/sjmonson/perf-llm-eval.git
 
 # Run
 perf-llm-eval --help
