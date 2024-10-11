@@ -4,16 +4,16 @@ A wrapper around [lm-eval-harness](https://github.com/EleutherAI/lm-evaluation-h
 
 ## Requirements
 
-### Install
+### To Install
 
 - Python 3.9 or newer
 
-### Run
+### To Run
 
 - An OpenAI API-compatible inference server; like [vLLM](https://github.com/vllm-project/vllm)
 - A directory containing the necessary datasets for the benchmark (see example)
 
-### Develop
+### To Develop
 
 - [poetry](https://python-poetry.org/docs/#installation)
 
