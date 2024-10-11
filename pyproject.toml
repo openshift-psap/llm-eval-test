@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "perf-llm-eval"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+lm-eval = "0.4.5"
+python-dotenv = "^1.0.1"
+unitxt = "^1.13.1"
+
+
+[tool.poetry.scripts]
+perf-llm-eval = "perf_llm_eval.eval_bench:eval_cli"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
