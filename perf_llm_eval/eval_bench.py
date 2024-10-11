@@ -36,7 +36,28 @@ def exec_lm_eval(tasks, model, endpoint, **kwargs):
         task_manager=tm,
     )
 
-    print(results)
+    individual_scores: dict = {}
+    agg_score: float = 0.0
+    if results:
+        for task, result in results["results"].items():
+            try:
+                acc = float(result["accuracy,none"])
+            except ValueError:
+                acc = float('nan')
+            try:
+                err = float(result["accuracy_stderr,none"])
+            except ValueError:
+                err = float('nan')
+            agg_score += acc
+            individual_scores[task] = {
+                "score": acc,
+                "stderr": err
+            }
+
+    overall_score = float(agg_score / len(tasks))
+
+    print(individual_scores)
+    print("Overall:", overall_score)
 
 
 def eval_cli():
