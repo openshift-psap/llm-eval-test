@@ -7,7 +7,7 @@ import tempfile
 import json
 import dotenv
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("perf-llm-eval")
 
 dotenv.load_dotenv()
 
@@ -28,8 +28,13 @@ def exec_lm_eval(tasks, model, endpoint, **kwargs):
     )
 
     model_args_str = ','.join([f"{k}={str(v)}" for k,v in model_args.items()])
-    tm = TaskManager(include_path=kwargs['tasks_path'], include_defaults=False)
+    tm = TaskManager(
+        include_path=kwargs['tasks_path'],
+        include_defaults=False,
+        verbosity=logging.getLevelName(kwargs['loglevel'])
+    )
 
+    logger.info("Running lm-eval")
     results = simple_evaluate(
         model="local-completions",
         model_args=model_args_str,
@@ -37,10 +42,12 @@ def exec_lm_eval(tasks, model, endpoint, **kwargs):
         #num_fewshot=self.few_shots,
         batch_size=kwargs['batch_size'],
         task_manager=tm,
+        verbosity=logging.getLevelName(kwargs['loglevel'])
     )
 
     if results:
         # Write results to outfile
+        logger.info(f"Writing results to {kwargs['output'].name}")
         output = json.dumps(results, indent=2, ensure_ascii=False)
         kwargs['output'].write(output)
 
@@ -50,7 +57,6 @@ def exec_lm_eval(tasks, model, endpoint, **kwargs):
             print(make_table(results, "groups"))
 
 def eval_cli():
-    logging.basicConfig(level=logging.INFO)
     parser = argparse.ArgumentParser(
                     description='Helper script for running PSAP relevent LLM benchmarks.',
                     epilog='',
@@ -88,8 +94,21 @@ def eval_cli():
     parser.add_argument('--output', '-o', type=argparse.FileType('w'),
                         default=f"{work_dir}/output.json",
                         help="results output file")
+    log_group = parser.add_mutually_exclusive_group()
+    log_group.add_argument('--verbose', '-v', default=logging.INFO,
+                           action="store_const", dest="loglevel", const=logging.DEBUG,
+                           help="set loglevel to DEBUG")
+    log_group.add_argument('--quiet', '-q',
+                           action="store_const", dest="loglevel", const=logging.ERROR,
+                           help="set loglevel to ERROR")
 
     args = parser.parse_args()
+
+    logging.basicConfig(
+        format="%(asctime)s,%(msecs)03d %(levelname)-8s [%(name)s/%(filename)s:%(lineno)d] %(message)s",
+        datefmt="%Y-%m-%d:%H:%M:%S",
+        level=args.loglevel
+    )
 
     # Setup environment
 
@@ -108,7 +127,7 @@ def eval_cli():
 
     args.tasks = args.tasks.split(',')
 
-    logger.info("Called with " + str(vars(args)))
+    logger.info("CLI called with " + str(vars(args)))
 
     # HACK: Working from a temporary directory allows us to load hf datasets
     # from disk because the dataset and evaluate libraries search the local
@@ -116,7 +135,7 @@ def eval_cli():
     # that point to the local python package.
     with tempfile.TemporaryDirectory() as tmpdir:
         os.chdir(tmpdir)
-        logger.info(f"Working from {tmpdir}")
+        logger.info(f"Changing working directory to {tmpdir}")
 
         # Symlink unitxt wrappers to working directory
         os.symlink(f"{local_dir}/unitxt", f"{tmpdir}/unitxt")
