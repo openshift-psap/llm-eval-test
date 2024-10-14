@@ -6,7 +6,7 @@ import json
 # Avoid importing these until we want to use lm_eval
 from lm_eval.evaluator import simple_evaluate
 from lm_eval.tasks import TaskManager  # type: ignore
-from lm_eval.utils import make_table
+from lm_eval.utils import handle_non_serializable, make_table
 
 logger = logging.getLogger("perf-llm-eval")
 
@@ -43,7 +43,9 @@ class LMEvalWrapper(object):
         if results:
             # Write results to outfile
             logger.info(f"Writing results to {kwargs['output'].name}")
-            output = json.dumps(results, indent=2, ensure_ascii=False)
+            output = json.dumps(
+                results, indent=2, default=handle_non_serializable, ensure_ascii=False
+            )
             kwargs['output'].write(output)
 
             # Print output table
