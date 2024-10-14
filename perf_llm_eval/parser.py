@@ -15,10 +15,10 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
 
     parser_base = argparse.ArgumentParser(add_help=False)
     parser_base.add_argument('--catalog_path', type=dir_path,
-                        default=f"{local_dir}/lm_eval/catalog",
+                        default=f"{local_dir}/benchmarks/catalog",
                              help="unitxt catalog directory", metavar='PATH')
     parser_base.add_argument('--tasks_path', type=dir_path,
-                        default=f"{local_dir}/lm_eval/tasks",
+                        default=f"{local_dir}/benchmarks/tasks",
                              help="lm-eval tasks directory", metavar='PATH')
     log_group = parser_base.add_mutually_exclusive_group()
     log_group.add_argument('-v', '--verbose', default=logging.INFO,
