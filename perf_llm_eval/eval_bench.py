@@ -73,24 +73,24 @@ def eval_cli():
         else:
             raise NotADirectoryError(path)
 
-    parser.add_argument('--catalog_path', type=dir_path,
-                        default=f"{local_dir}/lm_eval/catalog",
-                        help="unitxt catalog directory")
-    parser.add_argument('--tasks_path', type=dir_path,
-                        default=f"{local_dir}/lm_eval/tasks",
-                        help="unitxt catalog directory")
-    parser.add_argument('--datasets', '-d', type=dir_path, required=True,
-                        default=f"{work_dir}/datasets",
-                        help="path to dataset storage")
     parser.add_argument('--endpoint', '-H', required=True,
                         default='http://127.0.0.1:8000/v1/completions',
                         help='OpenAI API-compatible endpoint')
     parser.add_argument('--model', '-m', required=True,
                         help="name of the model under test")
-    parser.add_argument('--batch_size', '-b', default=64, type=int,
-                        help="per-request batch size")
     parser.add_argument('--tasks', '-t', required=True,
                         help="comma separated list of tasks")
+    parser.add_argument('--datasets', '-d', type=dir_path, required=True,
+                        default=f"{work_dir}/datasets",
+                        help="path to dataset storage")
+    parser.add_argument('--batch_size', '-b', default=64, type=int,
+                        help="per-request batch size")
+    parser.add_argument('--catalog_path', type=dir_path,
+                        default=f"{local_dir}/lm_eval/catalog",
+                        help="unitxt catalog directory")
+    parser.add_argument('--tasks_path', type=dir_path,
+                        default=f"{local_dir}/lm_eval/tasks",
+                        help="lm-eval tasks directory")
     parser.add_argument('--output', '-o', type=argparse.FileType('w'),
                         default=f"{work_dir}/output.json",
                         help="results output file")
