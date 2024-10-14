@@ -4,6 +4,7 @@ import os
 import argparse
 import logging
 import tempfile
+import json
 import dotenv
 
 logger = logging.getLogger(__name__)
@@ -15,6 +16,7 @@ def exec_lm_eval(tasks, model, endpoint, **kwargs):
     # Avoid importing these until we want to exec
     from lm_eval.evaluator import simple_evaluate
     from lm_eval.tasks import TaskManager  # type: ignore
+    from lm_eval.utils import make_table
 
     model_args = dict(
         model = model,
@@ -37,29 +39,15 @@ def exec_lm_eval(tasks, model, endpoint, **kwargs):
         task_manager=tm,
     )
 
-    individual_scores: dict = {}
-    agg_score: float = 0.0
     if results:
-        for task, result in results["results"].items():
-            try:
-                acc = float(result["accuracy,none"])
-            except ValueError:
-                acc = float('nan')
-            try:
-                err = float(result["accuracy_stderr,none"])
-            except ValueError:
-                err = float('nan')
-            agg_score += acc
-            individual_scores[task] = {
-                "score": acc,
-                "stderr": err
-            }
+        # Write results to outfile
+        output = json.dumps(results, indent=2, ensure_ascii=False)
+        kwargs['output'].write(output)
 
-    overall_score = float(agg_score / len(tasks))
-
-    print(individual_scores)
-    print("Overall:", overall_score)
-
+        # Print output table
+        print(make_table(results))
+        if results.get('groups'):
+            print(make_table(results, "groups"))
 
 def eval_cli():
     logging.basicConfig(level=logging.INFO)
@@ -94,9 +82,12 @@ def eval_cli():
     parser.add_argument('--model', '-m', required=True,
                         help="name of the model under test")
     parser.add_argument('--batch_size', '-b', default=64, type=int,
-                        help="")
+                        help="per-request batch size")
     parser.add_argument('--tasks', '-t', required=True,
-                        help="Comma separated list of tasks")
+                        help="comma separated list of tasks")
+    parser.add_argument('--output', '-o', type=argparse.FileType('w'),
+                        default=f"{work_dir}/output.json",
+                        help="results output file")
 
     args = parser.parse_args()
 
