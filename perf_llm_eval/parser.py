@@ -21,10 +21,10 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
                         default=f"{local_dir}/lm_eval/tasks",
                         help="lm-eval tasks directory")
     log_group = parser_base.add_mutually_exclusive_group()
-    log_group.add_argument('--verbose', '-v', default=logging.INFO,
+    log_group.add_argument('-v', '--verbose', default=logging.INFO,
                            action="store_const", dest="loglevel", const=logging.DEBUG,
                            help="set loglevel to DEBUG")
-    log_group.add_argument('--quiet', '-q',
+    log_group.add_argument('-q', '--quiet',
                            action="store_const", dest="loglevel", const=logging.ERROR,
                            help="set loglevel to ERROR")
 
@@ -42,19 +42,19 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
         parents=[parser_base]
     )
-    parser_run.add_argument('--endpoint', '-H', required=True,
+    parser_run.add_argument('-H', '--endpoint', required=True,
                         default='http://127.0.0.1:8000/v1/completions',
                         help='OpenAI API-compatible endpoint')
-    parser_run.add_argument('--model', '-m', required=True,
+    parser_run.add_argument('-m', '--model', required=True,
                         help="name of the model under test")
-    parser_run.add_argument('--tasks', '-t', required=True,
+    parser_run.add_argument('-t', '--tasks', required=True,
                         help="comma separated list of tasks")
-    parser_run.add_argument('--datasets', '-d', type=dir_path, required=True,
+    parser_run.add_argument('-d', '--datasets', type=dir_path, required=True,
                         default=f"{work_dir}/datasets",
                         help="path to dataset storage")
-    parser_run.add_argument('--batch_size', '-b', default=64, type=int,
+    parser_run.add_argument('-b', '--batch_size', default=64, type=int,
                         help="per-request batch size")
-    parser_run.add_argument('--output', '-o', type=argparse.FileType('w'),
+    parser_run.add_argument('-o', '--output', type=argparse.FileType('w'),
                         default=f"{work_dir}/output.json",
                         help="results output file")
 
