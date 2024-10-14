@@ -1,0 +1,3 @@
+task: mmlu_pro_chemistry
+include: unitxt
+recipe: card=cards.mmlu_pro.chemistry,template=templates.qa.multiple_choice.with_topic.lm_eval_harness

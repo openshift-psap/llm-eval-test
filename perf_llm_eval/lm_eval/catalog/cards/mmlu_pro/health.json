@@ -5,9 +5,9 @@
         "path": "TIGER-Lab/MMLU-Pro"
     },
     "preprocess_steps": [
-	{
+        {
             "__type__": "filter_by_expression",
-            "expression": "category == 'other'"
+            "expression": "category == 'health'"
         },
         {
             "__type__": "rename_splits",
@@ -16,7 +16,7 @@
             }
         },
         {
-            "__type__": "rename",
+            "__type__": "rename_fields",
             "field_to_field": {
                 "options": "choices",
                 "answer_index": "answer"
@@ -25,12 +25,12 @@
         {
             "__type__": "set",
             "fields": {
-                "topic": "other"
+                "topic": "health"
             }
         }
     ],
     "task": "tasks.qa.multiple_choice.with_topic",
-    "templates": "templates.qa.multiple_choice.with_topic.lm_eval_harness",
+    "templates": "templates.qa.multiple_choice.with_topic.all",
     "__tags__": {
         "annotations_creators": "no-annotation",
         "arxiv": [
