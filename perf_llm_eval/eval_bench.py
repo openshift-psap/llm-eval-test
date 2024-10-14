@@ -79,7 +79,7 @@ def eval_cli():
     args = parser.parse_args()
 
     logging.basicConfig(
-        format="%(asctime)s,%(msecs)03d %(levelname)-8s [%(name)s/%(filename)s:%(lineno)d] %(message)s",
+        format="%(levelname)-.4s %(asctime)s,%(msecs)03d [%(name)s@%(filename)s:%(lineno)d] %(message)s",
         datefmt="%Y-%m-%d:%H:%M:%S",
         level=args.loglevel
     )
