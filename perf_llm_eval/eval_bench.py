@@ -4,11 +4,8 @@ import os
 import argparse
 import logging
 import tempfile
-import dotenv
 
 logger = logging.getLogger("perf-llm-eval")
-
-dotenv.load_dotenv()
 
 
 def setup_parser(local_dir: str, work_dir: str):
