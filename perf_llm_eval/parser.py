@@ -16,10 +16,10 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
     parser_base = argparse.ArgumentParser(add_help=False)
     parser_base.add_argument('--catalog_path', type=dir_path,
                         default=f"{local_dir}/lm_eval/catalog",
-                        help="unitxt catalog directory")
+                             help="unitxt catalog directory", metavar='PATH')
     parser_base.add_argument('--tasks_path', type=dir_path,
                         default=f"{local_dir}/lm_eval/tasks",
-                        help="lm-eval tasks directory")
+                             help="lm-eval tasks directory", metavar='PATH')
     log_group = parser_base.add_mutually_exclusive_group()
     log_group.add_argument('-v', '--verbose', default=logging.INFO,
                            action="store_const", dest="loglevel", const=logging.DEBUG,
@@ -42,18 +42,19 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
         parents=[parser_base]
     )
-    parser_run.add_argument('-H', '--endpoint', required=True,
-                        default='http://127.0.0.1:8000/v1/completions',
-                        help='OpenAI API-compatible endpoint')
-    parser_run.add_argument('-m', '--model', required=True,
-                        help="name of the model under test")
-    parser_run.add_argument('-t', '--tasks', required=True,
-                        help="comma separated list of tasks")
-    parser_run.add_argument('-d', '--datasets', type=dir_path, required=True,
-                        default=f"{work_dir}/datasets",
-                        help="path to dataset storage")
+    required = parser_run.add_argument_group('required')
+    required.add_argument('-H', '--endpoint', required=True,
+                          default='http://127.0.0.1:8000/v1/completions',
+                          help='OpenAI API-compatible endpoint')
+    required.add_argument('-m', '--model', required=True,
+                          help="name of the model under test")
+    required.add_argument('-t', '--tasks', required=True,
+                          help="comma separated list of tasks")
+    required.add_argument('-d', '--datasets', type=dir_path, required=True,
+                          default=f"{work_dir}/datasets",
+                          help="path to dataset storage", metavar='PATH')
     parser_run.add_argument('-b', '--batch_size', default=64, type=int,
-                        help="per-request batch size")
+                            help="per-request batch size", metavar='INT')
     parser_run.add_argument('-o', '--output', type=argparse.FileType('w'),
                         default=f"{work_dir}/output.json",
                         help="results output file")
