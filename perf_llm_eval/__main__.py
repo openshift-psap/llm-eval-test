@@ -49,13 +49,15 @@ def eval_cli():
             logger.info(f"Changing working directory to {tmpdir}")
 
             # Symlink unitxt wrappers to working directory
-            os.symlink(f"{local_dir}/unitxt", f"{tmpdir}/unitxt")
+            for dataset in os.listdir(f"{local_dir}/wrappers"):
+                os.symlink(f"{local_dir}/wrappers/{dataset}", f"{tmpdir}/{dataset}")
 
             # Symlink datasets to working directory
             for dataset in os.listdir(args.datasets):
-                if dataset == 'unitxt':
-                    continue # TODO Handle this better
-                os.symlink(f"{args.datasets}/{dataset}", f"{tmpdir}/{dataset}")
+                try:
+                    os.symlink(f"{args.datasets}/{dataset}", f"{tmpdir}/{dataset}")
+                except FileExistsError:
+                    logger.warn(f"Dataset '{dataset}' conflicts with existing wrapper, skipping")
 
             # Call wrapped lm-eval
             args.tasks = args.tasks.split(',')
