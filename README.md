@@ -27,47 +27,52 @@ source venv/bin/activate
 # Install the package
 pip install git+https://github.com/sjmonson/perf-llm-eval.git
 
-# Run
-perf-llm-eval --help
+# View run options
+perf-llm-eval run --help
 ```
 
 ## Usage
 
 ```
-usage: perf-llm-eval [-h] [--catalog_path CATALOG_PATH] [--tasks_path TASKS_PATH] --datasets DATASETS --endpoint ENDPOINT --model MODEL [--batch_size BATCH_SIZE] --tasks TASKS
+usage: perf-llm-eval run [-h] [--catalog_path PATH] [--tasks_path PATH] [-v | -q] -H ENDPOINT -m MODEL -t TASKS -d PATH [-b INT] [-o OUTPUT]
 
-Helper script for running PSAP relevent LLM benchmarks.
+Run tasks
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
-  --catalog_path CATALOG_PATH
-                        unitxt catalog directory
-  --tasks_path TASKS_PATH
-                        unitxt catalog directory
-  --datasets DATASETS, -d DATASETS
-                        path to dataset storage
-  --endpoint ENDPOINT, -H ENDPOINT
+  --catalog_path PATH   unitxt catalog directory
+  --tasks_path PATH     lm-eval tasks directory
+  -v, --verbose         set loglevel to DEBUG
+  -q, --quiet           set loglevel to ERROR
+  -b INT, --batch_size INT
+                        per-request batch size
+  -o OUTPUT, --output OUTPUT
+                        results output file
+
+required:
+  -H ENDPOINT, --endpoint ENDPOINT
                         OpenAI API-compatible endpoint
-  --model MODEL, -m MODEL
+  -m MODEL, --model MODEL
                         name of the model under test
-  --batch_size BATCH_SIZE, -b BATCH_SIZE
-  --tasks TASKS, -t TASKS
-                        Comma separated list of tasks
+  -t TASKS, --tasks TASKS
+                        comma separated list of tasks
+  -d PATH, --datasets PATH
+                        path to dataset storage
 ```
 
 ### Example: MMLU-Pro Benchmark
 
 ``` sh
 # Create dataset storage
-export DATASETS_DIR=$(pwd)/datasets
+DATASETS_DIR=$(pwd)/datasets
 mkdir $DATASETS_DIR
 
 # Download the MMLU-Pro dataset
-export DATASET=TIGER-Lab/MMLU-Pro
+DATASET=TIGER-Lab/MMLU-Pro
 huggingface-cli download $DATASET --repo-type dataset --local-dir $DATASETS_DIR/$DATASET
 
 # Run the benchmark
-export ENDPOINT=http://127.0.0.1:8003/v1/completions # An OpenAI API-compatable completions endpoint
-export MODEL_NAME=meta-llama/Llama-3.1-8B # Name of the model hosted on the inference server
-perf-llm-eval --endpoint $ENDPOINT --model $MODEL_NAME --datasets $DATASET_DIR --tasks mmlu_pro_all
+ENDPOINT=http://127.0.0.1:8000/v1/completions # An OpenAI API-compatable completions endpoint
+MODEL_NAME=meta-llama/Llama-3.1-8B # Name of the model hosted on the inference server
+perf-llm-eval run --endpoint $ENDPOINT --model $MODEL_NAME --datasets $DATASETS_DIR --tasks mmlu_pro
 ```
