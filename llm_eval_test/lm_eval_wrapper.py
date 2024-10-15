@@ -8,7 +8,7 @@ from lm_eval.evaluator import simple_evaluate
 from lm_eval.tasks import TaskManager  # type: ignore
 from lm_eval.utils import handle_non_serializable, make_table
 
-logger = logging.getLogger("perf-llm-eval")
+logger = logging.getLogger("llm-eval-test")
 
 class LMEvalWrapper(object):
     @staticmethod

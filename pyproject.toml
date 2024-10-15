@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "perf-llm-eval"
+name = "llm-eval-test"
 version = "0.1.0"
 description = ""
 authors = ["Samuel Monson <smonson@redhat.com>"]
@@ -12,7 +12,7 @@ unitxt = "^1.13.1"
 
 
 [tool.poetry.scripts]
-perf-llm-eval = "perf_llm_eval.__main__:eval_cli"
+llm-eval-test = "llm_eval_test.__main__:eval_cli"
 
 [build-system]
 requires = ["poetry-core"]
