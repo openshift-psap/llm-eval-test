@@ -35,7 +35,7 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
         parents=[parser_base]
     )
-    subparsers = parser.add_subparsers(help='commands', dest='command')
+    subparsers = parser.add_subparsers(help='commands', dest='command', required=True)
     parser_run = subparsers.add_parser(
         'run',
         description="Run tasks",
