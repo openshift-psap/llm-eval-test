@@ -1,4 +1,4 @@
-# perf-llm-eval
+# llm-eval-test
 
 A wrapper around [lm-eval-harness](https://github.com/EleutherAI/lm-evaluation-harness) and [Unitxt](https://github.com/IBM/unitxt) designed for evaluation of a local inference endpoint.
 
@@ -25,16 +25,16 @@ python -m venv venv
 source venv/bin/activate
 
 # Install the package
-pip install git+https://github.com/sjmonson/perf-llm-eval.git
+pip install git+https://github.com/sjmonson/llm-eval-test.git
 
 # View run options
-perf-llm-eval run --help
+llm-eval-test run --help
 ```
 
 ## Usage
 
 ```
-usage: perf-llm-eval run [-h] [--catalog_path PATH] [--tasks_path PATH] [-v | -q] -H ENDPOINT -m MODEL -t TASKS -d PATH [-b INT] [-o OUTPUT]
+usage: llm-eval-test run [-h] [--catalog_path PATH] [--tasks_path PATH] [-v | -q] -H ENDPOINT -m MODEL -t TASKS -d PATH [-b INT] [-o OUTPUT]
 
 Run tasks
 
@@ -74,5 +74,5 @@ huggingface-cli download $DATASET --repo-type dataset --local-dir $DATASETS_DIR/
 # Run the benchmark
 ENDPOINT=http://127.0.0.1:8000/v1/completions # An OpenAI API-compatable completions endpoint
 MODEL_NAME=meta-llama/Llama-3.1-8B # Name of the model hosted on the inference server
-perf-llm-eval run --endpoint $ENDPOINT --model $MODEL_NAME --datasets $DATASETS_DIR --tasks mmlu_pro
+llm-eval-test run --endpoint $ENDPOINT --model $MODEL_NAME --datasets $DATASETS_DIR --tasks mmlu_pro
 ```

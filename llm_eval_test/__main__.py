@@ -4,9 +4,9 @@ import os
 import logging
 import tempfile
 
-from perf_llm_eval.parser import setup_parser
+from llm_eval_test.parser import setup_parser
 
-logger = logging.getLogger("perf-llm-eval")
+logger = logging.getLogger("llm-eval-test")
 
 
 def eval_cli():
@@ -35,7 +35,7 @@ def eval_cli():
     os.environ["UNITXT_ARTIFACTORIES"] = args.catalog_path
 
     # Late import to avoid slow cli
-    from perf_llm_eval.lm_eval_wrapper import LMEvalWrapper
+    from llm_eval_test.lm_eval_wrapper import LMEvalWrapper
 
     if args.command == 'list':
         LMEvalWrapper.list_tasks(args.tasks_path)
