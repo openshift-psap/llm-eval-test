@@ -3,10 +3,31 @@
 import os
 import logging
 import tempfile
+from typing import Optional
 
 from llm_eval_test.parser import setup_parser
 
 logger = logging.getLogger("llm-eval-test")
+
+
+def config_env(offline_mode: bool = True, unitxt_catalog: Optional[str] = None):
+    """Setup environment."""
+
+    # Unitxt need to set this to run certain benchmarks
+    os.environ["UNITXT_ALLOW_UNVERIFIED_CODE"] = "True"
+
+    if offline_mode:
+        # Disable downloads from hf
+        os.environ["HF_HUB_OFFLINE"] = "1"
+        # If we don't set this then Unitxt
+        # will redownload the catalog each run
+        os.environ["UNITXT_USE_ONLY_LOCAL_CATALOGS"] = "True"
+
+    if unitxt_catalog:
+        # Use local Unitxt catalog
+        # NOTE: If UNITXT_USE_ONLY_LOCAL_CATALOGS is not set the
+        # default catalog cards may overwrite local cards
+        os.environ["UNITXT_ARTIFACTORIES"] = unitxt_catalog
 
 
 def eval_cli():
@@ -23,16 +44,7 @@ def eval_cli():
     )
     logger.info("CLI called with " + str(vars(args)))
 
-    # Setup environment
-    ## Disable downloads from hf
-    os.environ["HF_HUB_OFFLINE"] = "1"
-    ## Unitxt need to set this to run certain benchmarks
-    os.environ["UNITXT_ALLOW_UNVERIFIED_CODE"] = "True"
-    ## If we don't set this then Unitxt
-    ## will redownload the catalog each run
-    os.environ["UNITXT_USE_ONLY_LOCAL_CATALOGS"] = "True"
-    ## Use local Unitxt catalog
-    os.environ["UNITXT_ARTIFACTORIES"] = args.catalog_path
+    config_env(unitxt_catalog=args.catalog_path)
 
     # Late import to avoid slow cli
     from llm_eval_test.lm_eval_wrapper import LMEvalWrapper
