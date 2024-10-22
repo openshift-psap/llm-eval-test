@@ -9,6 +9,8 @@ readme = "README.md"
 python = "^3.9"
 lm-eval = {extras = ["api"], version = "0.4.5"}
 unitxt = "1.14.0"
+# Use CPU torch to cut down on deps
+torch = {version = ">=1.8", source = "torch-cpu"}
 
 
 [tool.poetry.scripts]
@@ -16,6 +18,12 @@ llm-eval-test = "llm_eval_test.__main__:eval_cli"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.0.1"
+
+
+[[tool.poetry.source]]
+name = "torch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+priority = "explicit"
 
 [build-system]
 requires = ["poetry-core"]
