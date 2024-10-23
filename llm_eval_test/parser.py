@@ -56,8 +56,7 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
     parser_run.add_argument('-b', '--batch_size', default=64, type=int,
                             help="per-request batch size", metavar='INT')
     parser_run.add_argument('-o', '--output', type=argparse.FileType('w'),
-                        default=f"{work_dir}/output.json",
-                        help="results output file")
+                            help="results output file")
 
     parser_list = subparsers.add_parser(
         'list',
