@@ -34,7 +34,8 @@ llm-eval-test run --help
 ## Usage
 
 ```
-usage: llm-eval-test run [-h] [--catalog_path PATH] [--tasks_path PATH] [-v | -q] -H ENDPOINT -m MODEL -t TASKS -d PATH [-b INT] [-o OUTPUT]
+usage: llm-eval-test run [-h] [--catalog_path PATH] [--tasks_path PATH] [-v | -q]
+-H ENDPOINT -m MODEL -t TASKS -d PATH [-b INT] [-o OUTPUT]
 
 Run tasks
 
