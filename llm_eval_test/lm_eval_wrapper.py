@@ -17,7 +17,7 @@ class LMEvalWrapper(object):
             model = model,
             base_url = endpoint,
             num_concurent=1,
-            max_retries=3,
+            max_retries=kwargs["retry"],
             tokenizer_backend=None,
             tokenized_requests=False
         )
