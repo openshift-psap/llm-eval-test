@@ -17,7 +17,7 @@ class LMEvalWrapper(object):
             model = model,
             base_url = endpoint,
             num_concurent=1,
-            max_retries=3,
+            max_retries=kwargs["retry"],
             tokenizer_backend=None,
             tokenized_requests=False
         )
@@ -41,12 +41,13 @@ class LMEvalWrapper(object):
         )
 
         if results:
-            # Write results to outfile
-            logger.info(f"Writing results to {kwargs['output'].name}")
-            output = json.dumps(
-                results, indent=2, default=handle_non_serializable, ensure_ascii=False
-            )
-            kwargs['output'].write(output)
+            if kwargs.get('output'):
+                # Write results to outfile
+                logger.info(f"Writing results to {kwargs['output'].name}")
+                output = json.dumps(
+                    results, indent=2, default=handle_non_serializable, ensure_ascii=False
+                )
+                kwargs['output'].write(output)
 
             # Print output table
             print(make_table(results))

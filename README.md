@@ -34,7 +34,8 @@ llm-eval-test run --help
 ## Usage
 
 ```
-usage: llm-eval-test run [-h] [--catalog_path PATH] [--tasks_path PATH] [-v | -q] -H ENDPOINT -m MODEL -t TASKS -d PATH [-b INT] [-o OUTPUT]
+usage: llm-eval-test run [-h] [--catalog_path PATH] [--tasks_path PATH] [-v | -q]
+-H ENDPOINT -m MODEL -t TASKS -d PATH [-b INT] [-o OUTPUT]
 
 Run tasks
 
@@ -69,6 +70,9 @@ mkdir $DATASETS_DIR
 
 # Download the MMLU-Pro dataset
 DATASET=TIGER-Lab/MMLU-Pro
+# Use your preferred method of downloading the dataset to $DATASETS_DIR/$DATASET
+# to use the huggingface-cli:
+pip install huggingface_hub[cli]
 huggingface-cli download $DATASET --repo-type dataset --local-dir $DATASETS_DIR/$DATASET
 
 # Run the benchmark

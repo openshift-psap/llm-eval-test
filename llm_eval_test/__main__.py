@@ -52,6 +52,9 @@ def eval_cli():
     if args.command == 'list':
         LMEvalWrapper.list_tasks(args.tasks_path)
     elif args.command == 'run':
+        if 'chat/completions' in args.endpoint.lower():
+            logger.warning("The /v1/chat/completions API is unsupported, please use /v1/completions")
+
         # HACK: Working from a temporary directory allows us to load hf datasets
         # from disk because the dataset and evaluate libraries search the local
         # path first. Since Unitxt is loaded as a dataset, we also provide wrappers
