@@ -8,6 +8,8 @@ from lm_eval.evaluator import simple_evaluate
 from lm_eval.tasks import TaskManager  # type: ignore
 from lm_eval.utils import handle_non_serializable, make_table
 
+from llm_eval_test.parser import OutputFormat
+
 logger = logging.getLogger("llm-eval-test")
 
 class LMEvalWrapper(object):
@@ -35,7 +37,7 @@ class LMEvalWrapper(object):
             model_args=model_args_str,
             tasks=tasks,
             #num_fewshot=self.few_shots,
-            batch_size=kwargs['batch_size'],
+            batch_size=kwargs['batch'],
             task_manager=tm,
             verbosity=logging.getLevelName(kwargs['loglevel'])
         )
@@ -44,8 +46,15 @@ class LMEvalWrapper(object):
             if kwargs.get('output'):
                 # Write results to outfile
                 logger.info(f"Writing results to {kwargs['output'].name}")
+
+                if kwargs['format'] == OutputFormat.summary:
+                    results_out = results.copy()
+                    results_out.pop("samples")
+                else: # kwargs['format'] == 'full'
+                    results_out = results
+
                 output = json.dumps(
-                    results, indent=2, default=handle_non_serializable, ensure_ascii=False
+                    results_out, indent=2, default=handle_non_serializable, ensure_ascii=False
                 )
                 kwargs['output'].write(output)
 
