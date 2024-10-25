@@ -4,6 +4,7 @@ import enum
 import os
 import logging
 import argparse
+import datetime
 
 
 class OutputFormat(enum.Enum):
@@ -38,10 +39,6 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
     parser_base.add_argument('--tasks-path', type=dir_path,
                         default=f"{local_dir}/benchmarks/tasks",
                              help="lm-eval tasks directory", metavar='PATH')
-    parser_base.add_argument('--format', type=OutputFormat,
-                             choices=list(OutputFormat),
-                             default=OutputFormat.default,
-                             help="format of output file")
     log_group = parser_base.add_mutually_exclusive_group()
     log_group.add_argument('-v', '--verbose', default=Defaults.log_level,
                            action="store_const", dest="loglevel", const=logging.DEBUG,
@@ -79,8 +76,17 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
                             help="per-request batch size", metavar='INT')
     parser_run.add_argument('-r', '--retry', default=Defaults.retry_count, type=int,
                             help="max number of times to retry a single request", metavar='INT')
-    parser_run.add_argument('-o', '--output', type=argparse.FileType('w'),
-                            help="results output file")
+    now_time = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H-%M-%S.%fZ")
+    output_group = parser_run.add_mutually_exclusive_group()
+    output_group.add_argument('-o', '--output', type=argparse.FileType('w'),
+                              default=f"{work_dir}/{now_time}.json",
+                              help="results output file")
+    output_group.add_argument('--no-output',
+                              action="store_const", dest="output", const=None,
+                              help="disable results output file")
+    parser_run.add_argument('--format', type=OutputFormat, default=OutputFormat.default,
+                              choices=list(OutputFormat),
+                              help="format of output file")
 
     parser_list = subparsers.add_parser(
         'list',
