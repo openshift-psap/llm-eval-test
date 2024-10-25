@@ -1,8 +1,19 @@
 
 
+import enum
 import os
 import logging
 import argparse
+
+
+class OutputFormat(enum.Enum):
+    """Log file output format"""
+    full    = 'full'
+    summary = 'summary'
+    default = summary
+
+    def __str__(self):
+        return str(self.value)
 
 
 class Defaults(object):
@@ -27,6 +38,10 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
     parser_base.add_argument('--tasks-path', type=dir_path,
                         default=f"{local_dir}/benchmarks/tasks",
                              help="lm-eval tasks directory", metavar='PATH')
+    parser_base.add_argument('--format', type=OutputFormat,
+                             choices=list(OutputFormat),
+                             default=OutputFormat.default,
+                             help="format of output file")
     log_group = parser_base.add_mutually_exclusive_group()
     log_group.add_argument('-v', '--verbose', default=Defaults.log_level,
                            action="store_const", dest="loglevel", const=logging.DEBUG,
