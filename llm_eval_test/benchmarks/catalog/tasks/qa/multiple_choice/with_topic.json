@@ -11,6 +11,7 @@
     },
     "prediction_type": "str",
     "metrics": [
-        "metrics.accuracy"
+        "metrics.accuracy",
+        "metrics.f1_macro"
     ]
 }
