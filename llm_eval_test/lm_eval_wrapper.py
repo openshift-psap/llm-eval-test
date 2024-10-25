@@ -35,7 +35,7 @@ class LMEvalWrapper(object):
             model_args=model_args_str,
             tasks=tasks,
             #num_fewshot=self.few_shots,
-            batch_size=kwargs['batch_size'],
+            batch_size=kwargs['batch'],
             task_manager=tm,
             verbosity=logging.getLevelName(kwargs['loglevel'])
         )
