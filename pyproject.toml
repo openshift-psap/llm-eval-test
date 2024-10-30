@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-lm-eval = {extras = ["api"], version = "0.4.5"}
+lm-eval = { extras = ["api"], git = "https://github.com/EleutherAI/lm-evaluation-harness", rev = "57272b6" }
 unitxt = "1.14.0"
 # Use CPU torch to cut down on deps
 torch = {version = ">=1.8", source = "torch-cpu"}
