@@ -412,9 +412,7 @@ joblib==1.4.2 ; python_version >= "3.9" and python_version < "4.0" \
 jsonlines==4.0.0 ; python_version >= "3.9" and python_version < "4.0" \
     --hash=sha256:0c6d2c09117550c089995247f605ae4cf77dd1533041d366351f6f298822ea74 \
     --hash=sha256:185b334ff2ca5a91362993f42e83588a360cf95ce4b71a73548502bda52a7c55
-lm-eval[api]==0.4.5 ; python_version >= "3.9" and python_version < "4.0" \
-    --hash=sha256:f5c28b6fdb838bd052037419addbf14b8de47e786390dd98fbfbf8e23c1b6155 \
-    --hash=sha256:f7606e07272a960b7d3fc08c2c62afdeaf0e31269ab2e0358c838b8eaf323879
+lm-eval[api] @ git+https://github.com/EleutherAI/lm-evaluation-harness@57272b63b4c2c7b60e9d2c5fef66b251bb8742ef ; python_version >= "3.9" and python_version < "4.0"
 lxml==5.3.0 ; python_version >= "3.9" and python_version < "4.0" \
     --hash=sha256:01220dca0d066d1349bd6a1726856a78f7929f3878f7e2ee83c296c69495309e \
     --hash=sha256:02ced472497b8362c8e902ade23e3300479f4f43e45f4105c85ef43b8db85229 \
