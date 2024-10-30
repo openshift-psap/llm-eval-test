@@ -841,15 +841,13 @@ files = [
 attrs = ">=19.2.0"
 
 [[package]]
-name = "lm-eval"
+name = "lm_eval"
 version = "0.4.5"
 description = "A framework for evaluating language models"
 optional = false
 python-versions = ">=3.8"
-files = [
-    {file = "lm_eval-0.4.5-py3-none-any.whl", hash = "sha256:f7606e07272a960b7d3fc08c2c62afdeaf0e31269ab2e0358c838b8eaf323879"},
-    {file = "lm_eval-0.4.5.tar.gz", hash = "sha256:f5c28b6fdb838bd052037419addbf14b8de47e786390dd98fbfbf8e23c1b6155"},
-]
+files = []
+develop = false
 
 [package.dependencies]
 accelerate = ">=0.26.0"
@@ -858,7 +856,7 @@ datasets = ">=2.16.0"
 dill = "*"
 evaluate = ">=0.4.0"
 jsonlines = "*"
-more-itertools = "*"
+more_itertools = "*"
 numexpr = "*"
 peft = ">=0.2.0"
 pybind11 = ">=2.6.2"
@@ -878,14 +876,14 @@ word2number = "*"
 zstandard = "*"
 
 [package.extras]
-all = ["lm-eval[anthropic]", "lm-eval[deepsparse]", "lm-eval[dev]", "lm-eval[gptq]", "lm-eval[hf-transfer]", "lm-eval[ifeval]", "lm-eval[mamba]", "lm-eval[math]", "lm-eval[multilingual]", "lm-eval[openai]", "lm-eval[promptsource]", "lm-eval[sentencepiece]", "lm-eval[sparseml]", "lm-eval[testing]", "lm-eval[vllm]", "lm-eval[wandb]", "lm-eval[zeno]"]
+all = ["lm_eval[anthropic]", "lm_eval[deepsparse]", "lm_eval[dev]", "lm_eval[gptq]", "lm_eval[hf-transfer]", "lm_eval[ifeval]", "lm_eval[mamba]", "lm_eval[math]", "lm_eval[multilingual]", "lm_eval[openai]", "lm_eval[promptsource]", "lm_eval[sentencepiece]", "lm_eval[sparseml]", "lm_eval[testing]", "lm_eval[vllm]", "lm_eval[wandb]", "lm_eval[zeno]"]
 api = ["aiohttp", "requests", "tenacity", "tiktoken", "tqdm"]
 deepsparse = ["deepsparse-nightly[llm] (>=1.8.0.20240404)"]
 dev = ["mypy", "pre-commit", "pytest", "pytest-cov", "pytest-xdist"]
 gptq = ["auto-gptq[triton] (>=0.6.0)"]
-hf-transfer = ["hf-transfer"]
+hf-transfer = ["hf_transfer"]
 ifeval = ["immutabledict", "langdetect", "nltk (>=3.9.1)"]
-mamba = ["causal-conv1d (==1.0.2)", "mamba-ssm"]
+mamba = ["causal-conv1d (==1.0.2)", "mamba_ssm"]
 math = ["antlr4-python3-runtime (==4.11)", "sympy (>=1.12)"]
 multilingual = ["jieba (>=0.42.1)", "nagisa (>=0.2.7)", "pycountry"]
 neuronx = ["optimum[neuronx]"]
@@ -897,6 +895,12 @@ testing = ["pytest", "pytest-cov", "pytest-xdist"]
 vllm = ["vllm (>=0.4.2)"]
 wandb = ["numpy", "pandas", "wandb (>=0.16.3)"]
 zeno = ["pandas", "zeno-client"]
+
+[package.source]
+type = "git"
+url = "https://github.com/EleutherAI/lm-evaluation-harness"
+reference = "57272b6"
+resolved_reference = "57272b63b4c2c7b60e9d2c5fef66b251bb8742ef"
 
 [[package]]
 name = "lxml"
@@ -3289,4 +3293,4 @@ cffi = ["cffi (>=1.11)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "04555a0d1c0842335840bd634226ff72da141c7c5ad4f7a29d92043452a3963d"
+content-hash = "c100a03c6583dd3218633ac7fce342bf618e80a8b9394ebbe5c31c68f41605d1"

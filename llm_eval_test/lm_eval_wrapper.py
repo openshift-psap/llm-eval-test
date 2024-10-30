@@ -21,7 +21,8 @@ class LMEvalWrapper(object):
             num_concurent=1,
             max_retries=kwargs["retry"],
             tokenizer_backend=None,
-            tokenized_requests=False
+            tokenized_requests=False,
+            verify_certificate=False,
         )
 
         model_args_str = ','.join([f"{k}={str(v)}" for k,v in model_args.items()])
