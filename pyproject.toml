@@ -13,6 +13,11 @@ dependencies = [
 requires-python = "<4.0,>=3.11"
 readme = "README.md"
 
+[project.optional-dependencies]
+leaderboard = [
+    "lm-eval[ifeval,math,sentencepiece]>=0.4.8",
+]
+
 # Use cpu pytorch to avoid downloading cuda
 [[tool.pdm.source]]
 name = "torch-cpu"
