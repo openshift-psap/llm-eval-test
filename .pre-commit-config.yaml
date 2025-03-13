@@ -1,12 +1,6 @@
 repos:
--   repo: https://github.com/python-poetry/poetry
-    rev: '1.8.3'
-    hooks:
-    -   id: poetry-check
-    -   id: poetry-lock
-        args: ["--no-update"]
-    -   name: requirements.txt
-        id: poetry-export
-    #-   name: requirements-dev.txt
-    #    id: poetry-export
-    #    args: ["--only", "dev", "-o", "requirements-dev.txt"]
+- repo: https://github.com/pdm-project/pdm
+  rev: 2.22.4
+  hooks:
+    - id: pdm-lock-check
+      name: check lock file matches pyproject
