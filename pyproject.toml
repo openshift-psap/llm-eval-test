@@ -6,7 +6,7 @@ authors = [
     {name = "Samuel Monson", email = "smonson@redhat.com"},
 ]
 dependencies = [
-    "lm-eval[api] @ git+https://github.com/EleutherAI/lm-evaluation-harness@57272b63b4c2c7b60e9d2c5fef66b251bb8742ef",
+    "lm-eval[api]==0.4.8",
     "unitxt==1.14.0",
     "torch>=1.8",
 ]
