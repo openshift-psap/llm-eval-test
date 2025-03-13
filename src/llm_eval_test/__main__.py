@@ -44,7 +44,7 @@ def eval_cli():
     )
     logger.info("CLI called with " + str(vars(args)))
 
-    config_env(unitxt_catalog=args.catalog_path)
+    config_env(offline_mode=args.offline, unitxt_catalog=args.catalog_path)
 
     # Late import to avoid slow cli
     from llm_eval_test.lm_eval_wrapper import LMEvalWrapper

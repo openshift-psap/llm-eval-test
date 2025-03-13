@@ -39,6 +39,9 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
     parser_base.add_argument('--tasks-path', type=dir_path,
                         default=f"{local_dir}/benchmarks/tasks",
                              help="lm-eval tasks directory", metavar='PATH')
+    parser_base.add_argument('--offline', type=bool,
+                             default=True, action=argparse.BooleanOptionalAction,
+                             help="Disable/enable updating datasets from the internet")
     log_group = parser_base.add_mutually_exclusive_group()
     log_group.add_argument('-v', '--verbose', default=Defaults.log_level,
                            action="store_const", dest="loglevel", const=logging.DEBUG,
