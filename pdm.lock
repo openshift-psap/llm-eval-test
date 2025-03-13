@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:541950e77efe243612f493ec1ffd96d38abc0446f1216a88a3a918aae20ce4c4"
+content_hash = "sha256:7e53edb5f002e379f85077da4569507c51343d7735402ad04c73b5ede8842e3d"
 
 [[metadata.targets]]
 requires_python = "~=3.9"
@@ -700,11 +700,8 @@ files = [
 
 [[package]]
 name = "lm-eval"
-version = "0.4.5"
-requires_python = ">=3.8"
-git = "https://github.com/EleutherAI/lm-evaluation-harness"
-ref = "57272b63b4c2c7b60e9d2c5fef66b251bb8742ef"
-revision = "57272b63b4c2c7b60e9d2c5fef66b251bb8742ef"
+version = "0.4.8"
+requires_python = ">=3.9"
 summary = "A framework for evaluating language models"
 groups = ["default"]
 dependencies = [
@@ -729,24 +726,29 @@ dependencies = [
     "word2number",
     "zstandard",
 ]
+files = [
+    {file = "lm_eval-0.4.8-py3-none-any.whl", hash = "sha256:2ba377e067affcfcd27b73d6c045f8ce9ff88accd56176d9a86af3c12b0e01f6"},
+    {file = "lm_eval-0.4.8.tar.gz", hash = "sha256:3a7ffff20347315bf2318796b90ec9f7dd819836567085b5f57fdcc8bc450b4d"},
+]
 
 [[package]]
 name = "lm-eval"
-version = "0.4.5"
+version = "0.4.8"
 extras = ["api"]
-requires_python = ">=3.8"
-git = "https://github.com/EleutherAI/lm-evaluation-harness"
-ref = "57272b63b4c2c7b60e9d2c5fef66b251bb8742ef"
-revision = "57272b63b4c2c7b60e9d2c5fef66b251bb8742ef"
+requires_python = ">=3.9"
 summary = "A framework for evaluating language models"
 groups = ["default"]
 dependencies = [
     "aiohttp",
-    "lm-eval @ git+https://github.com/EleutherAI/lm-evaluation-harness@57272b63b4c2c7b60e9d2c5fef66b251bb8742ef",
+    "lm-eval==0.4.8",
     "requests",
     "tenacity",
     "tiktoken",
     "tqdm",
+]
+files = [
+    {file = "lm_eval-0.4.8-py3-none-any.whl", hash = "sha256:2ba377e067affcfcd27b73d6c045f8ce9ff88accd56176d9a86af3c12b0e01f6"},
+    {file = "lm_eval-0.4.8.tar.gz", hash = "sha256:3a7ffff20347315bf2318796b90ec9f7dd819836567085b5f57fdcc8bc450b4d"},
 ]
 
 [[package]]
