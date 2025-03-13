@@ -40,7 +40,6 @@ class LMEvalWrapper(object):
             #num_fewshot=self.few_shots,
             batch_size=kwargs['batch'],
             task_manager=tm,
-            verbostiy=logging.getLevelName(logger.level)
         )
 
         if results:
