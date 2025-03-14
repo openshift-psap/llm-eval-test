@@ -75,6 +75,8 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
     required.add_argument('-d', '--datasets', type=dir_path, required=True,
                           default=f"{work_dir}/datasets",
                           help="path to dataset storage", metavar='PATH')
+    parser_run.add_argument('--tokenizer',
+                          help="path or huggingface tokenizer name, if none uses model name")
     parser_run.add_argument('-b', '--batch', default=Defaults.batch_size, type=int,
                             help="per-request batch size", metavar='INT')
     parser_run.add_argument('-r', '--retry', default=Defaults.retry_count, type=int,

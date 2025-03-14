@@ -14,14 +14,17 @@ logger = logging.getLogger("llm-eval-test")
 
 class LMEvalWrapper(object):
     @staticmethod
-    def exec(tasks, model, endpoint, **kwargs):
+    def exec(tasks, model, tokenizer, endpoint, **kwargs):
+        # Fallback to model if tokenizer is not provided
+        tokenizer = tokenizer if tokenizer else model
+
         model_args = dict(
             model = model,
+            tokenizer = tokenizer,
             base_url = endpoint,
             num_concurent=1,
             max_retries=kwargs["retry"],
-            tokenizer_backend=None,
-            tokenized_requests=False,
+            tokenizer_backend="huggingface",
             verify_certificate=False,
         )
 
