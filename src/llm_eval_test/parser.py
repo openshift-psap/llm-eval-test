@@ -1,5 +1,3 @@
-
-
 import enum
 import os
 import logging
@@ -99,5 +97,14 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,
         parents=[parser_base]
     )
-
+    parser_download = subparsers.add_parser(
+        'download',
+        description="download datasets for open-llm-v1 tasks",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        parents=[parser_base]
+    )
+    parser_download.add_argument('-t', '--tasks',
+                                 type=str, required=True, help="comma separated tasks to download for example: arc_challenge,hellaswag")
+    parser_download.add_argument("-d", "--datasets", type=dir_path, default=f"{work_dir}/datasets", help="Dataset directory")
+    parser_download.add_argument("-f", "--force-download", action=argparse.BooleanOptionalAction, type=bool, default=False, help="Force download datasets even it already exist")
     return parser

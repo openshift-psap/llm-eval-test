@@ -6,7 +6,7 @@ import tempfile
 from typing import Optional
 
 from llm_eval_test.parser import setup_parser
-
+from llm_eval_test.downloader import download_datasets
 logger = logging.getLogger("llm-eval-test")
 
 
@@ -77,7 +77,11 @@ def eval_cli():
             # Call wrapped lm-eval
             args.tasks = args.tasks.split(',')
             LMEvalWrapper.exec(**vars(args))
-
+    elif args.command == "download":
+            tasks = args.tasks.strip("").lower() if "," not in args.tasks else [t.strip(" ").lower() for t in args.tasks.split(",")]
+            force_download = args.force_download
+            datasets = download_datasets(args.datasets, tasks, args.tasks_path, force_download)
+            logger.info(f"Downloaded datasets: {datasets}")
 
 if __name__ == '__main__':
     eval_cli()
