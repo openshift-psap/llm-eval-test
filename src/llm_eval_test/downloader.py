@@ -1,35 +1,45 @@
 from huggingface_hub import snapshot_download
 from lm_eval.tasks import TaskManager  # type: ignore
-from lm_eval.api.task import Task # type: ignore
+from lm_eval.api.task import ConfigurableTask # type: ignore
+from lm_eval.api.group import ConfigurableGroup # type: ignore
 import os 
 import logging
 logger = logging.getLogger("downloader")
 
 
-def download_datasets(datasets_dir: str, tasks: list[str], tasks_path: str, force_download: bool = False):
+def download_datasets(datasets_dir: str, tasks: list[str], tasks_path: str, force_download: bool = False) -> dict:
 
     task_list = [tasks] if isinstance(tasks, str) else tasks
+
+    # TaskManager
     tm = TaskManager(
         include_path=tasks_path,
         include_defaults=True,
         verbosity=logging.getLevelName(logger.level),
     )
-
+    # Load tasks and groups
     task_dict = tm.load_task_or_group(task_list)
     if not task_dict:
         logger.error(f"No tasks loaded for {task_list}")
         return {}
+    # Map tasks and subtasks to datasets
     task_to_dataset = {}
-    for task_name, task_obj in task_dict.items():
-        dataset_path = getattr(task_obj, "DATASET_PATH", None)
-        dataset_name = getattr(task_obj, "DATASET_NAME", None)
-        if dataset_path:
-            # Construct full dataset identifier (e.g., "allenai/ai2_arc" or "hellaswag")
-            task_to_dataset[task_name] = dataset_path
+    for group_or_task_obj, subtasks_or_task in task_dict.items():
+        # Handle the top-level object (could be group or task)
+        if isinstance(group_or_task_obj, (ConfigurableGroup, ConfigurableTask)):
+            task_name = group_or_task_obj._config.get("group", None) or group_or_task_obj._config.get("task", "unknown")
+            if isinstance(group_or_task_obj, ConfigurableGroup):
+                sub_result = process_task_object(subtasks_or_task, task_name)
+                task_to_dataset.update(sub_result)
+        elif isinstance(group_or_task_obj, str):
+            # if task is standalone type str i.e arc_challenge, arc_easy, etc
+            print(group_or_task_obj)
+            sub_result = process_task_object(subtasks_or_task, group_or_task_obj)
+            task_to_dataset.update(sub_result)
         else:
-            logger.warning(f"No DATASET_PATH found for task '{task_name}'")
+            logger.warning(f"!! Unexpected key type in task_dict: {type(group_or_task_obj)}")
 
-    logger.info(f"Task mapping to datasets name =>: {task_to_dataset} {dataset_name}")
+    logger.info(f"Task mapping to datasets name =>: {task_to_dataset}")
     os.makedirs(datasets_dir, exist_ok=True)
 
     # Download datasets
@@ -53,3 +63,23 @@ def download_datasets(datasets_dir: str, tasks: list[str], tasks_path: str, forc
     return local_paths
 
 
+def process_task_object(task_obj, task_name=None) -> dict:
+    """
+    """
+    task_to_dataset = {}
+    if isinstance(task_obj, ConfigurableTask) or isinstance(task_obj, str):
+        # Individual task
+        dataset_path = getattr(task_obj, "DATASET_PATH", None)
+        if dataset_path:
+            task_to_dataset[task_name] = dataset_path
+            logger.info(f"Task '{task_name}' mapped to {dataset_path}")
+        else:
+            logger.warning(f"No DATASET_PATH for task '{task_name}'")
+
+    elif isinstance(task_obj, dict):
+        # Nested dictionary of tasks/groups
+        for sub_name, sub_obj in task_obj.items():
+            sub_result = process_task_object(sub_obj, sub_name)
+            task_to_dataset.update(sub_result)
+
+    return task_to_dataset
