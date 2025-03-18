@@ -1,4 +1,3 @@
-from huggingface_hub import snapshot_download
 from lm_eval.tasks import TaskManager  # type: ignore
 from lm_eval.api.task import ConfigurableTask # type: ignore
 from lm_eval.api.group import ConfigurableGroup # type: ignore
@@ -33,7 +32,6 @@ def download_datasets(datasets_dir: str, tasks: list[str], tasks_path: str, forc
                 task_to_dataset.update(sub_result)
         elif isinstance(group_or_task_obj, str):
             # if task is standalone type str i.e arc_challenge, arc_easy, etc
-            print(group_or_task_obj)
             sub_result = process_task_object(subtasks_or_task, group_or_task_obj)
             task_to_dataset.update(sub_result)
         else:
@@ -49,6 +47,7 @@ def download_datasets(datasets_dir: str, tasks: list[str], tasks_path: str, forc
         logger.info(f"Downloading '{task_name}' dataset from {dataset_repo} to {target_dir}")
         try:
             if force_download or not os.path.exists(target_dir):
+                from huggingface_hub import snapshot_download
                 snapshot_download(
                     repo_id=dataset_repo,
                     repo_type="dataset",

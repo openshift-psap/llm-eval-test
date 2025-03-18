@@ -44,6 +44,12 @@ def eval_cli():
     )
     logger.info("CLI called with " + str(vars(args)))
 
+    if args.offline is None:
+        if args.command == 'download':
+            args.offline = False
+        else:
+            args.offline = True
+
     config_env(offline_mode=args.offline, unitxt_catalog=args.catalog_path)
 
     # Late import to avoid slow cli
