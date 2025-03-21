@@ -96,21 +96,17 @@ required:
 ### Example: MMLU-Pro Benchmark
 
 ``` sh
-# Create dataset storage
-DATASETS_DIR=$(pwd)/datasets
-mkdir $DATASETS_DIR
-
-# Download the MMLU-Pro dataset
-DATASET=TIGER-Lab/MMLU-Pro
-
-# Use your preferred method of downloading the dataset to $DATASETS_DIR/$DATASET
-# to use the huggingface-cli:
-pip install huggingface_hub[cli]
-huggingface-cli download $DATASET --repo-type dataset --local-dir $DATASETS_DIR/$DATASET
 
 # Run the benchmark
 ENDPOINT=http://127.0.0.1:8080/v1/completions # An OpenAI API-compatable completions endpoint
 MODEL_NAME=meta-llama/Llama-3.1-8B # Name of the model hosted on the inference server
+TOKENIZER=ibm-granite/granite-3.1-8b-instruct
 llm-eval-test run --endpoint $ENDPOINT --model $MODEL_NAME --datasets $DATASETS_DIR --tasks mmlu_pro
+
+Examples:
+llm-eval-test run -H  ENDPOINT --model /mnt/models/ --tokenizer TOKENIZER --datasets ./datasets --tasks arc_challenge; 
+llm-eval-test run -H  ENDPOINT --model /mnt/models/ --tokenizer TOKENIZER --datasets ./datasets --tasks arc_challenge,gsm8k,arc_challenge,hellaswag,mmlu_pro,truthfulqa,winogrande
+llm-eval-test run -H  ENDPOINT --model /mnt/models/ --tokenizer TOKENIZER --datasets ./datasets --tasks leaderboard
+
 ```
 
