@@ -18,13 +18,6 @@ leaderboard = [
     "lm-eval[ifeval,math,sentencepiece]>=0.4.8",
 ]
 
-[tool.pdm]
-package-dir = "src"
-package-type = "library"
-
-[tool.pdm.build]
-includes = ["src/llm_eval_test"]
-
 # Use cpu pytorch to avoid downloading cuda
 [[tool.pdm.source]]
 name = "torch-cpu"
