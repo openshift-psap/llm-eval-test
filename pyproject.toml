@@ -35,6 +35,9 @@ verify_ssl = true
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
+[tool.pdm]
+distribution = true
+
 [project.scripts]
 llm-eval-test = "llm_eval_test.__main__:eval_cli"
 
