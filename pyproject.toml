@@ -1,7 +1,7 @@
 [project]
 name = "llm-eval-test"
 version = "0.2.1"
-description = ""
+description = "LLM Evaluation Test Tool"
 authors = [
     {name = "Samuel Monson", email = "smonson@redhat.com"},
 ]
@@ -17,6 +17,13 @@ readme = "README.md"
 leaderboard = [
     "lm-eval[ifeval,math,sentencepiece]>=0.4.8",
 ]
+
+[tool.pdm]
+package-dir = "src"
+package-type = "library"
+
+[tool.pdm.build]
+includes = ["src/llm_eval_test"]
 
 # Use cpu pytorch to avoid downloading cuda
 [[tool.pdm.source]]

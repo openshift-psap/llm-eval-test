@@ -34,7 +34,8 @@ llm-eval-test run --help
 ## Download Usage
 
 ``` sh
-# Create dataset storage
+
+# Create dataset directory
 DATASETS_DIR=$(pwd)/datasets
 mkdir $DATASETS_DIR
 
@@ -56,9 +57,9 @@ options:
                         Force download datasets even it already exist (default: False)
 
 
-llm-eval-test download arc_challenge,GSM8K,HellaSwag
-llm-eval-test download leaderboard
-llm-eval-test download arc_challenge,GSM8K,HellaSwag -f (to overwrite the previously downloaded datasets)
+llm-eval-test download --tasks arc_challenge,GSM8K,HellaSwag
+llm-eval-test download --tasks leaderboard
+llm-eval-test download --tasks arc_challenge,GSM8K,HellaSwag -f (to overwrite the previously downloaded datasets)
 ```
 
 ## Run Usage
