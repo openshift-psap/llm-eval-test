@@ -49,6 +49,12 @@ extend-select = [
   "YTT",  # flake8-2020
 ]
 extend-ignore = ["B018", "B019", "RUF018"]
+# TODO: Remove after tasks cleanup
+exclude = ["src/llm_eval_test/benchmarks/tasks/*"]
+
+[tool.ruff.format]
+# TODO: Remove after tasks cleanup
+exclude = ["src/llm_eval_test/benchmarks/tasks/*"]
 
 [tool.pdm]
 distribution = true

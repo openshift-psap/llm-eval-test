@@ -1,8 +1,10 @@
-from lm_eval.tasks import TaskManager  # type: ignore
-from lm_eval.api.task import ConfigurableTask # type: ignore
-from lm_eval.api.group import ConfigurableGroup # type: ignore
-import os 
 import logging
+import os
+
+from lm_eval.api.group import ConfigurableGroup
+from lm_eval.api.task import ConfigurableTask
+from lm_eval.tasks import TaskManager
+
 logger = logging.getLogger("downloader")
 
 
@@ -25,7 +27,7 @@ def download_datasets(datasets_dir: str, tasks: list[str], tasks_path: str, forc
     task_to_dataset = {}
     for group_or_task_obj, subtasks_or_task in task_dict.items():
         # Handle the top-level object (could be group or task)
-        if isinstance(group_or_task_obj, (ConfigurableGroup, ConfigurableTask)):
+        if isinstance(group_or_task_obj, ConfigurableGroup | ConfigurableTask):
             task_name = group_or_task_obj._config.get("group", None) or group_or_task_obj._config.get("task", "unknown")
             if isinstance(group_or_task_obj, ConfigurableGroup):
                 sub_result = process_task_object(subtasks_or_task, task_name)
@@ -58,7 +60,7 @@ def download_datasets(datasets_dir: str, tasks: list[str], tasks_path: str, forc
                 local_paths[task_name] = target_dir
         except Exception as e:
             logger.error(f"Failed to download '{task_name}' from {dataset_repo}: {e}")
-    
+
     return local_paths
 
 

@@ -1,8 +1,8 @@
-import enum
-import os
-import logging
 import argparse
 import datetime
+import enum
+import logging
+import os
 
 
 class OutputFormat(enum.Enum):
@@ -15,7 +15,7 @@ class OutputFormat(enum.Enum):
         return str(self.value)
 
 
-class Defaults(object):
+class Defaults:
     """Default values for arguments."""
     batch_size:  int = 32
     retry_count: int = 5
@@ -79,7 +79,7 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
                             help="per-request batch size", metavar='INT')
     parser_run.add_argument('-r', '--retry', default=Defaults.retry_count, type=int,
                             help="max number of times to retry a single request", metavar='INT')
-    now_time = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H-%M-%S.%fZ")
+    now_time = datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%dT%H-%M-%S.%fZ")
     output_group = parser_run.add_mutually_exclusive_group()
     output_group.add_argument('-o', '--output', type=argparse.FileType('w'),
                               default=f"{work_dir}/{now_time}.json",
@@ -91,7 +91,7 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
                               choices=list(OutputFormat),
                               help="format of output file")
 
-    parser_list = subparsers.add_parser(
+    parser_list = subparsers.add_parser( # noqa: F841
         'list',
         description="List available tasks",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter,

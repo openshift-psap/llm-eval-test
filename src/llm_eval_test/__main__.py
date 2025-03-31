@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
-import os
 import logging
+import os
 import tempfile
-from typing import Optional
 
 from llm_eval_test.parser import setup_parser
+
 logger = logging.getLogger("llm-eval-test")
 
 
-def config_env(offline_mode: bool = True, unitxt_catalog: Optional[str] = None):
+def config_env(offline_mode: bool = True, unitxt_catalog: str | None = None):
     """Setup environment."""
 
     # Unitxt need to set this to run certain benchmarks
