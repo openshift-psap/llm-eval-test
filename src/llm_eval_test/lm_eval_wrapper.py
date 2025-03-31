@@ -34,10 +34,10 @@ class LMEvalWrapper:
 
         logger.info("Running lm-eval")
         results = simple_evaluate(
-            model="local-completions",
+            model=("local-chat-completions" if kwargs.get("chat_template") else "local-completions"),
+            apply_chat_template=kwargs.get("chat_template", False),
             model_args=model_args_str,
             tasks=tasks,
-            # num_fewshot=self.few_shots,
             batch_size=kwargs["batch"],
             task_manager=tm,
         )

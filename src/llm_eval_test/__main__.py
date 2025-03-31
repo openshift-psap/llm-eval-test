@@ -57,8 +57,13 @@ def eval_cli():
     if args.command == "list":
         LMEvalWrapper.list_tasks(args.tasks_path)
     elif args.command == "run":
-        if "chat/completions" in args.endpoint.lower():
-            logger.warning("The /v1/chat/completions API is unsupported, please use /v1/completions")
+        if args.endpoint.lower().endswith("chat/completions"):
+            logger.info(
+                "/v1/chat/completions API detected; applying chat template. To avoid this please use /v1/completions"
+            )
+            chat_template = True
+        else:
+            chat_template = False
 
         # HACK: Working from a temporary directory allows us to load hf datasets
         # from disk because the dataset and evaluate libraries search the local
@@ -77,11 +82,11 @@ def eval_cli():
                 try:
                     os.symlink(f"{args.datasets}/{dataset}", f"{tmpdir}/{dataset}")
                 except FileExistsError:
-                    logger.warn(f"Dataset '{dataset}' conflicts with existing wrapper, skipping")
+                    logger.warning(f"Dataset '{dataset}' conflicts with existing wrapper, skipping")
 
             # Call wrapped lm-eval
             args.tasks = args.tasks.split(",")
-            LMEvalWrapper.exec(**vars(args))
+            LMEvalWrapper.exec(**vars(args), chat_template=chat_template)
     elif args.command == "download":
         from llm_eval_test.downloader import download_datasets
 
