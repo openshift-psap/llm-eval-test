@@ -1,5 +1,3 @@
-
-
 import json
 import logging
 
@@ -11,6 +9,7 @@ from lm_eval.utils import handle_non_serializable, make_table
 from llm_eval_test.parser import OutputFormat
 
 logger = logging.getLogger("llm-eval-test")
+
 
 class LMEvalWrapper:
     @staticmethod
@@ -28,11 +27,9 @@ class LMEvalWrapper:
             "verify_certificate": False,
         }
 
-        model_args_str = ','.join([f"{k}={v!s}" for k,v in model_args.items()])
+        model_args_str = ",".join([f"{k}={v!s}" for k, v in model_args.items()])
         tm = TaskManager(
-            include_path=kwargs['tasks_path'],
-            include_defaults=False,
-            verbosity=logging.getLevelName(logger.level)
+            include_path=kwargs["tasks_path"], include_defaults=False, verbosity=logging.getLevelName(logger.level)
         )
 
         logger.info("Running lm-eval")
@@ -40,38 +37,32 @@ class LMEvalWrapper:
             model="local-completions",
             model_args=model_args_str,
             tasks=tasks,
-            #num_fewshot=self.few_shots,
-            batch_size=kwargs['batch'],
+            # num_fewshot=self.few_shots,
+            batch_size=kwargs["batch"],
             task_manager=tm,
         )
 
         if results:
-            if kwargs.get('output'):
+            if kwargs.get("output"):
                 # Write results to outfile
                 logger.info(f"Writing results to {kwargs['output'].name}")
 
-                if kwargs['format'] == OutputFormat.summary:
+                if kwargs["format"] == OutputFormat.summary:
                     results_out = results.copy()
                     results_out.pop("samples")
-                else: # kwargs['format'] == 'full'
+                else:  # kwargs['format'] == 'full'
                     results_out = results
 
-                output = json.dumps(
-                    results_out, indent=2, default=handle_non_serializable, ensure_ascii=False
-                )
-                kwargs['output'].write(output)
+                output = json.dumps(results_out, indent=2, default=handle_non_serializable, ensure_ascii=False)
+                kwargs["output"].write(output)
 
             # Print output table
             print(make_table(results))
-            if results.get('groups'):
+            if results.get("groups"):
                 print(make_table(results, "groups"))
 
     @staticmethod
     def list_tasks(tasks_path: str):
-        tm = TaskManager(
-            include_path=tasks_path,
-            include_defaults=False,
-            verbosity=logging.getLevelName(logger.level)
-        )
+        tm = TaskManager(include_path=tasks_path, include_defaults=False, verbosity=logging.getLevelName(logger.level))
 
         print(tm.list_all_tasks())
