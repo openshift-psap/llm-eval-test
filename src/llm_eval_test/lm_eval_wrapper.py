@@ -21,7 +21,7 @@ class LMEvalWrapper:
             "model": model,
             "tokenizer": tokenizer,
             "base_url": endpoint,
-            "num_concurent": 1,
+            "num_concurrent": kwargs["batch"],
             "max_retries": kwargs["retry"],
             "tokenizer_backend": "huggingface",
             "verify_certificate": False,
@@ -38,7 +38,7 @@ class LMEvalWrapper:
             apply_chat_template=kwargs.get("chat_template", False),
             model_args=model_args_str,
             tasks=tasks,
-            batch_size=kwargs["batch"],
+            batch_size=1,  # We use concurrency to drive multiple requests
             task_manager=tm,
         )
 
