@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
-import os
 import logging
+import os
 import tempfile
-from typing import Optional
 
 from llm_eval_test.parser import setup_parser
+
 logger = logging.getLogger("llm-eval-test")
 
 
-def config_env(offline_mode: bool = True, unitxt_catalog: Optional[str] = None):
+def config_env(offline_mode: bool = True, unitxt_catalog: str | None = None):
     """Setup environment."""
 
     # Unitxt need to set this to run certain benchmarks
@@ -39,12 +39,12 @@ def eval_cli():
     logging.basicConfig(
         format="%(levelname)-.4s %(asctime)s,%(msecs)03d [%(name)s@%(filename)s:%(lineno)d] %(message)s",
         datefmt="%Y-%m-%d:%H:%M:%S",
-        level=args.loglevel
+        level=args.loglevel,
     )
     logger.info("CLI called with " + str(vars(args)))
 
     if args.offline is None:
-        if args.command == 'download':
+        if args.command == "download":
             args.offline = False
         else:
             args.offline = True
@@ -54,10 +54,10 @@ def eval_cli():
     # Late import to avoid slow cli
     from llm_eval_test.lm_eval_wrapper import LMEvalWrapper
 
-    if args.command == 'list':
+    if args.command == "list":
         LMEvalWrapper.list_tasks(args.tasks_path)
-    elif args.command == 'run':
-        if 'chat/completions' in args.endpoint.lower():
+    elif args.command == "run":
+        if "chat/completions" in args.endpoint.lower():
             logger.warning("The /v1/chat/completions API is unsupported, please use /v1/completions")
 
         # HACK: Working from a temporary directory allows us to load hf datasets
@@ -80,14 +80,20 @@ def eval_cli():
                     logger.warn(f"Dataset '{dataset}' conflicts with existing wrapper, skipping")
 
             # Call wrapped lm-eval
-            args.tasks = args.tasks.split(',')
+            args.tasks = args.tasks.split(",")
             LMEvalWrapper.exec(**vars(args))
     elif args.command == "download":
-            from llm_eval_test.downloader import download_datasets
-            tasks = args.tasks.strip("").lower() if "," not in args.tasks else [t.strip(" ").lower() for t in args.tasks.split(",")]
-            force_download = args.force_download
-            datasets = download_datasets(args.datasets, tasks, args.tasks_path, force_download)
-            logger.info(f"Downloaded datasets: {datasets}")
+        from llm_eval_test.downloader import download_datasets
 
-if __name__ == '__main__':
+        tasks = (
+            args.tasks.strip("").lower()
+            if "," not in args.tasks
+            else [t.strip(" ").lower() for t in args.tasks.split(",")]
+        )
+        force_download = args.force_download
+        datasets = download_datasets(args.datasets, tasks, args.tasks_path, force_download)
+        logger.info(f"Downloaded datasets: {datasets}")
+
+
+if __name__ == "__main__":
     eval_cli()

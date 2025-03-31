@@ -19,17 +19,9 @@ leaderboard = [
 ]
 
 # Use cpu pytorch to avoid downloading cuda
-[[tool.pdm.source]]
-name = "torch-cpu"
-url = "https://download.pytorch.org/whl/cpu"
-verify_ssl = true
-
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
-
-[tool.pdm]
-distribution = true
 
 [project.scripts]
 llm-eval-test = "llm_eval_test.__main__:eval_cli"
@@ -37,4 +29,36 @@ llm-eval-test = "llm_eval_test.__main__:eval_cli"
 [dependency-groups]
 dev = [
     "pre-commit>=4.1.0",
+    "ruff>=0.11.2",
 ]
+
+[tool.ruff]
+line-length = 120
+src = ["src"]
+
+[tool.ruff.lint]
+extend-select = [
+  "I",    # isort
+  "B",    # flake8-bugbear
+  "C4",   # flake8-comprehensions
+  "FA",   # flake8-future-annotations
+  "PGH",  # pygrep-hooks
+  "RUF",  # ruff
+  "W",    # pycodestyle
+  "UP",   # pyupgrade
+  "YTT",  # flake8-2020
+]
+extend-ignore = ["B018", "B019", "RUF018"]
+# TODO: Remove after tasks cleanup
+exclude = ["src/llm_eval_test/benchmarks/tasks/*"]
+
+[tool.ruff.format]
+# TODO: Remove after tasks cleanup
+exclude = ["src/llm_eval_test/benchmarks/tasks/*"]
+
+[tool.pdm]
+distribution = true
+[[tool.pdm.source]]
+name = "torch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+verify_ssl = true
