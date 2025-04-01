@@ -21,7 +21,7 @@ class LMEvalWrapper:
             "model": model,
             "tokenizer": tokenizer,
             "base_url": endpoint,
-            "num_concurent": 1,
+            "num_concurrent": 1,
             "max_retries": kwargs["retry"],
             "tokenizer_backend": "huggingface",
             "verify_certificate": False,
@@ -36,8 +36,8 @@ class LMEvalWrapper:
         results = simple_evaluate(
             model="local-completions",
             model_args=model_args_str,
+            apply_chat_template=kwargs.get("chat_template", False),
             tasks=tasks,
-            # num_fewshot=self.few_shots,
             batch_size=kwargs["batch"],
             task_manager=tm,
         )
