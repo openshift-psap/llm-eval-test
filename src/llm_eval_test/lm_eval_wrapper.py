@@ -53,6 +53,7 @@ class LMEvalWrapper:
                 else:  # kwargs['format'] == 'full'
                     results_out = results
 
+                results_out["let_config"] = kwargs
                 output = json.dumps(results_out, indent=2, default=handle_non_serializable, ensure_ascii=False)
                 kwargs["output"].write(output)
 
