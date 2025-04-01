@@ -96,7 +96,14 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
         help="path to dataset storage",
         metavar="PATH",
     )
-    parser_run.add_argument("--tokenizer", help="path or huggingface tokenizer name, if none uses model name")
+    parser_run.add_argument("-T", "--tokenizer", help="path or huggingface tokenizer name, if none uses model name")
+    parser_run.add_argument(
+        "--chat-template",
+        action=argparse.BooleanOptionalAction,
+        type=bool,
+        default=False,
+        help="use chat template for requests",
+    )
     parser_run.add_argument(
         "-b", "--batch", default=Defaults.batch_size, type=int, help="per-request batch size", metavar="INT"
     )
