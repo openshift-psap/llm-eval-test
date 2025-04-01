@@ -77,7 +77,7 @@ def eval_cli():
                 try:
                     os.symlink(f"{args.datasets}/{dataset}", f"{tmpdir}/{dataset}")
                 except FileExistsError:
-                    logger.warn(f"Dataset '{dataset}' conflicts with existing wrapper, skipping")
+                    logger.warning(f"Dataset '{dataset}' conflicts with existing wrapper, skipping")
 
             # Call wrapped lm-eval
             args.tasks = args.tasks.split(",")
