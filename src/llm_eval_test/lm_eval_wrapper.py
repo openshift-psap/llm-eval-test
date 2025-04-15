@@ -37,6 +37,7 @@ class LMEvalWrapper:
             model="local-completions",
             model_args=model_args_str,
             apply_chat_template=kwargs.get("chat_template", False),
+            fewshot_as_multiturn=kwargs.get("chat_template", False),
             tasks=tasks,
             batch_size=kwargs["batch"],
             task_manager=tm,
