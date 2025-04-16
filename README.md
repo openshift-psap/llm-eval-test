@@ -65,31 +65,39 @@ llm-eval-test download --tasks arc_challenge,GSM8K,HellaSwag -f (to overwrite th
 ## Run Usage
 
 ```
-usage: llm-eval-test run [-h] [--catalog_path PATH] [--tasks_path PATH] [-v | -q]
--H ENDPOINT -m MODEL -t TASKS -d PATH [-b INT] [-o OUTPUT]
+usage: llm-eval-test run [-h] [--catalog-path PATH] [--tasks-path PATH] [--offline | --no-offline] [-v | -q] -H ENDPOINT -m MODEL -t TASKS -d PATH [-T TOKENIZER] [-b INT] [-r INT] [-o OUTPUT | --no-output] [--format {full,summary}] [--chat-template | --no-chat-template]
 
 Run tasks
 
 options:
   -h, --help            show this help message and exit
-  --catalog_path PATH   unitxt catalog directory
-  --tasks_path PATH     lm-eval tasks directory
+  --catalog-path PATH   unitxt catalog directory
+  --tasks-path PATH     lm-eval tasks directory
+  --offline, --no-offline
+                        Disable/enable updating datasets from the internet
   -v, --verbose         set loglevel to DEBUG
   -q, --quiet           set loglevel to ERROR
-  -b INT, --batch_size INT
-                        per-request batch size
-  -o OUTPUT, --output OUTPUT
-                        results output file
+  -T, --tokenizer TOKENIZER
+                        path or huggingface tokenizer name, if none uses model name (default: None)
+  -b, --batch INT       per-request batch size
+  -r, --retry INT       max number of times to retry a single request
+  -o, --output OUTPUT   results output file
+  --no-output           disable results output file
+  --format {full,summary}
+                        format of output file
 
 required:
-  -H ENDPOINT, --endpoint ENDPOINT
+  -H, --endpoint ENDPOINT
                         OpenAI API-compatible endpoint
-  -m MODEL, --model MODEL
-                        name of the model under test
-  -t TASKS, --tasks TASKS
-                        comma separated list of tasks
-  -d PATH, --datasets PATH
-                        path to dataset storage
+  -m, --model MODEL     name of the model under test
+  -t, --tasks TASKS     comma separated list of tasks
+  -d, --datasets PATH   path to dataset storage
+
+prompt parameters:
+  these modify the prompt sent to the server and thus will affect the results
+
+  --chat-template, --no-chat-template
+                        use chat template for requests
 
 ```
 
