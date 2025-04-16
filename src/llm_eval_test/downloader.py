@@ -15,7 +15,7 @@ def download_datasets(datasets_dir: str, tasks: list[str], tasks_path: str, forc
     # TaskManager
     tm = TaskManager(
         include_path=tasks_path,
-        include_defaults=True,
+        include_defaults=False,
         verbosity=logging.getLevelName(logger.level),
     )
     # Load tasks and groups
