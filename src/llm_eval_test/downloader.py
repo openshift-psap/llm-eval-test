@@ -1,5 +1,6 @@
 import logging
 import os
+import tempfile
 
 from lm_eval.api.group import ConfigurableGroup
 from lm_eval.api.task import ConfigurableTask
@@ -50,15 +51,17 @@ def download_datasets(datasets_dir: str, tasks: list[str], tasks_path: str, forc
             if force_download or not os.path.exists(target_dir):
                 from huggingface_hub import snapshot_download
 
-                snapshot_download(
-                    repo_id=dataset_repo,
-                    repo_type="dataset",
-                    local_dir=target_dir,
-                    local_dir_use_symlinks=False,  # TODO: Remove as depercated
-                    force_download=True,
-                    token=os.getenv("HF_TOKEN", True),  # Str or True
-                )
-                local_paths[task_name] = target_dir
+                with tempfile.TemporaryDirectory() as tmpdir:
+                    snapshot_download(
+                        repo_id=dataset_repo,
+                        repo_type="dataset",
+                        cache_dir=tmpdir,
+                        local_dir=target_dir,
+                        local_dir_use_symlinks=False,  # TODO: Remove as depercated
+                        force_download=True,
+                        token=os.getenv("HF_TOKEN", True),  # Str or True
+                    )
+                    local_paths[task_name] = target_dir
         except Exception as e:
             logger.error(f"Failed to download '{task_name}' from {dataset_repo}: {e}")
 
