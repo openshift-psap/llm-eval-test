@@ -96,7 +96,7 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
         help="path to dataset storage",
         metavar="PATH",
     )
-    parser_run.add_argument("--tokenizer", help="path or huggingface tokenizer name, if none uses model name")
+    parser_run.add_argument("-T", "--tokenizer", help="path or huggingface tokenizer name, if none uses model name")
     parser_run.add_argument(
         "-b", "--batch", default=Defaults.batch_size, type=int, help="per-request batch size", metavar="INT"
     )
@@ -122,6 +122,17 @@ def setup_parser(local_dir: str, work_dir: str) -> argparse.ArgumentParser:
         default=OutputFormat.default,
         choices=list(OutputFormat),
         help="format of output file",
+    )
+    prompt_args = parser_run.add_argument_group(
+        title="prompt parameters",
+        description="these modify the prompt sent to the server and thus will affect the results",
+    )
+    prompt_args.add_argument(
+        "--chat-template",
+        action=argparse.BooleanOptionalAction,
+        type=bool,
+        default=False,
+        help="use chat template for requests",
     )
 
     parser_list = subparsers.add_parser(  # noqa: F841

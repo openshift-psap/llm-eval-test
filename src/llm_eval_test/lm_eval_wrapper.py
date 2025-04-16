@@ -21,7 +21,7 @@ class LMEvalWrapper:
             "model": model,
             "tokenizer": tokenizer,
             "base_url": endpoint,
-            "num_concurent": 1,
+            "num_concurrent": 1,
             "max_retries": kwargs["retry"],
             "tokenizer_backend": "huggingface",
             "verify_certificate": False,
@@ -36,8 +36,9 @@ class LMEvalWrapper:
         results = simple_evaluate(
             model="local-completions",
             model_args=model_args_str,
+            apply_chat_template=kwargs.get("chat_template", False),
+            fewshot_as_multiturn=kwargs.get("chat_template", False),
             tasks=tasks,
-            # num_fewshot=self.few_shots,
             batch_size=kwargs["batch"],
             task_manager=tm,
         )
@@ -53,6 +54,7 @@ class LMEvalWrapper:
                 else:  # kwargs['format'] == 'full'
                     results_out = results
 
+                results_out["let_config"] = kwargs
                 output = json.dumps(results_out, indent=2, default=handle_non_serializable, ensure_ascii=False)
                 kwargs["output"].write(output)
 
