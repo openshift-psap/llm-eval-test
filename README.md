@@ -6,7 +6,7 @@ A wrapper around [lm-eval-harness](https://github.com/EleutherAI/lm-evaluation-h
 
 ### To Install
 
-- Python 3.9 or newer
+- Python 3.10 or newer
 
 ### To Run
 
@@ -15,7 +15,7 @@ A wrapper around [lm-eval-harness](https://github.com/EleutherAI/lm-evaluation-h
 
 ### To Develop
 
-- [poetry](https://python-poetry.org/docs/#installation)
+- [PDM](https://pdm-project.org/en/latest/)
 
 ## Getting Started
 
@@ -34,14 +34,6 @@ llm-eval-test run --help
 ## Download Usage
 
 ``` sh
-
-# Create dataset directory
-DATASETS_DIR=$(pwd)/datasets
-mkdir $DATASETS_DIR
-
-#To download the datasets:
-
-llm-eval-test download -h
 usage: llm-eval-test download [-h] [--catalog-path PATH] [--tasks-path PATH] [--offline | --no-offline] [-v | -q] -t TASKS [-d DATASETS] [-f | --force-download | --no-force-download]
 
 download datasets for open-llm-v1 tasks
@@ -50,16 +42,11 @@ options:
   -h, --help            show this help message and exit
 
   -t TASKS, --tasks TASKS
-                        comma separated tasks to download for example: arc_challenge,hellaswag (default: None)
+                        comma separated tasks to download for example: arc_challenge,hellaswag
   -d DATASETS, --datasets DATASETS
-                        Dataset directory (default: ./datasets)
+                        Dataset directory
   -f, --force-download, --no-force-download
-                        Force download datasets even it already exist (default: False)
-
-
-llm-eval-test download --tasks arc_challenge,GSM8K,HellaSwag
-llm-eval-test download --tasks leaderboard
-llm-eval-test download --tasks arc_challenge,GSM8K,HellaSwag -f (to overwrite the previously downloaded datasets)
+                        Force download datasets even it already exist
 ```
 
 ## Run Usage
@@ -104,17 +91,17 @@ prompt parameters:
 ### Example: MMLU-Pro Benchmark
 
 ``` sh
+# Create dataset directory
+DATASETS_DIR=$(pwd)/datasets
+mkdir $DATASETS_DIR
+
+# Download the MMLU-Pro dataset
+DATASET=TIGER-Lab/MMLU-Pro
+llm-eval-test download --datasets $DATASETS_DIR --tasks mmlu_pro
 
 # Run the benchmark
 ENDPOINT=http://127.0.0.1:8080/v1/completions # An OpenAI API-compatable completions endpoint
 MODEL_NAME=meta-llama/Llama-3.1-8B # Name of the model hosted on the inference server
 TOKENIZER=ibm-granite/granite-3.1-8b-instruct
 llm-eval-test run --endpoint $ENDPOINT --model $MODEL_NAME --datasets $DATASETS_DIR --tasks mmlu_pro
-
-Examples:
-llm-eval-test run -H  ENDPOINT --model /mnt/models/ --tokenizer TOKENIZER --datasets ./datasets --tasks arc_challenge; 
-llm-eval-test run -H  ENDPOINT --model /mnt/models/ --tokenizer TOKENIZER --datasets ./datasets --tasks arc_challenge,gsm8k,arc_challenge,hellaswag,mmlu_pro,truthfulqa,winogrande
-llm-eval-test run -H  ENDPOINT --model /mnt/models/ --tokenizer TOKENIZER --datasets ./datasets --tasks leaderboard
-
 ```
-
