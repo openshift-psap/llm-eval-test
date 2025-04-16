@@ -54,8 +54,9 @@ def download_datasets(datasets_dir: str, tasks: list[str], tasks_path: str, forc
                     repo_id=dataset_repo,
                     repo_type="dataset",
                     local_dir=target_dir,
-                    local_dir_use_symlinks=False,
-                    use_auth_token=os.getenv("HF_TOKEN"),
+                    local_dir_use_symlinks=False,  # TODO: Remove as depercated
+                    force_download=True,
+                    token=os.getenv("HF_TOKEN", True),  # Str or True
                 )
                 local_paths[task_name] = target_dir
         except Exception as e:
