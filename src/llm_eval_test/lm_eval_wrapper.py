@@ -29,6 +29,9 @@ class LMEvalWrapper:
         # Check if we are missing a chat template when we need one
         if chat_template and not tokenizer.chat_template:
             # HACK: Mistral has a separate file for chat template try to load that on failure
+            logger.warning(
+                "tokenizer_config.json is missing a chat template. Attempting to load from chat_template.json"
+            )
             try:
                 file_path = hf_hub_download(repo_id=tokenizer_repo, filename="chat_template.json")
                 with open(file_path) as f:
@@ -41,6 +44,7 @@ class LMEvalWrapper:
 
         with tempfile.TemporaryDirectory() as tokenizer_path:
             # Save the modified tokenizer to our temp path
+            logger.info(f"Saving tokenizer to {tokenizer_path}")
             tokenizer.save_pretrained(tokenizer_path)
 
             model_args = {
