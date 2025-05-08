@@ -1,5 +1,6 @@
 import json
 import logging
+import os
 import tempfile
 
 from huggingface_hub import hf_hub_download
@@ -33,7 +34,9 @@ class LMEvalWrapper:
                 "tokenizer_config.json is missing a chat template. Attempting to load from chat_template.json"
             )
             try:
-                file_path = hf_hub_download(repo_id=tokenizer_repo, filename="chat_template.json")
+                file_path = hf_hub_download(
+                    repo_id=tokenizer_repo, token=os.getenv("HF_TOKEN", True), filename="chat_template.json"
+                )
                 with open(file_path) as f:
                     template = json.load(f)["chat_template"]
                 tokenizer.chat_template = template
