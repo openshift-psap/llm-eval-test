@@ -1,6 +1,6 @@
 [project]
 name = "llm-eval-test"
-version = "0.3.1"
+version = "0.3.2"
 description = "LLM Evaluation Test Tool"
 authors = [
     {name = "Samuel Monson", email = "smonson@redhat.com"},
