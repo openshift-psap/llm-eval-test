@@ -1,9 +1,12 @@
 repos:
 - repo: https://github.com/pdm-project/pdm
-  rev: 2.22.4
+  rev: 2.24.1
   hooks:
     - id: pdm-lock-check
       name: check lock file matches pyproject
+    - name: pylock.toml
+      id: pdm-export
+      args: ["-f", "pylock", "-o", "pylock.toml"]
 - repo: https://github.com/astral-sh/ruff-pre-commit
   rev: v0.11.2
   hooks:
