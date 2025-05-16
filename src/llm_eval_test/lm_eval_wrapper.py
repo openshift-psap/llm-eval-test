@@ -44,6 +44,8 @@ class LMEvalWrapper:
                 raise RuntimeError("Failed to load chat template from alternate location") from e
             except EntryNotFoundError as e:
                 raise RuntimeError("No chat template found for given tokenizer") from e
+        elif not chat_template:
+            tokenizer.chat_template = None
 
         with tempfile.TemporaryDirectory() as tokenizer_path:
             # Save the modified tokenizer to our temp path
