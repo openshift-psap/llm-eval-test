@@ -376,14 +376,14 @@ dependencies = [
 
 [[packages]]
 name = "lm-eval"
-version = "0.4.9.1"
-requires-python = ">=3.9"
+version = "0.4.9.2"
+requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = [
     "accelerate>=0.26.0",
-    "datasets<4.0,>=2.16.0",
+    "datasets>=2.16.0",
     "dill",
     "evaluate",
     "evaluate>=0.4.0",
@@ -1102,7 +1102,7 @@ dependencies = [
 ]
 
 [tool.pdm]
-hashes = {sha256 = "592e6dba8e26f71679e6e081fc88c0372f8889bbece1fe2f10d18b3566a40de3"}
+hashes = {sha256 = "d6919351bdf520468cdb8758e0d3f74fa76f61f88a1ef245a989a7a110f11f40"}
 
 [[tool.pdm.targets]]
 requires_python = "~=3.11"
