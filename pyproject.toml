@@ -6,7 +6,7 @@ authors = [
     {name = "Samuel Monson", email = "smonson@redhat.com"},
 ]
 dependencies = [
-    "lm-eval[api]==0.4.8",
+    "lm-eval[api]==0.4.9.1",
     "unitxt==1.22.0",
     "torch>=1.8",
 ]

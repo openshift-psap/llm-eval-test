@@ -5,7 +5,7 @@
 groups = ["default", "dev", "leaderboard"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:3a77dafdcf67376a70d6a1d8824c26fcfe67c76d6cbca4a74c3cf497709f955d"
+content_hash = "sha256:592e6dba8e26f71679e6e081fc88c0372f8889bbece1fe2f10d18b3566a40de3"
 
 [[metadata.targets]]
 requires_python = "~=3.11"
@@ -685,13 +685,13 @@ files = [
 
 [[package]]
 name = "lm-eval"
-version = "0.4.8"
+version = "0.4.9.1"
 requires_python = ">=3.9"
 summary = "A framework for evaluating language models"
 groups = ["default", "leaderboard"]
 dependencies = [
     "accelerate>=0.26.0",
-    "datasets>=2.16.0",
+    "datasets<4.0,>=2.16.0",
     "dill",
     "evaluate",
     "evaluate>=0.4.0",
@@ -712,33 +712,33 @@ dependencies = [
     "zstandard",
 ]
 files = [
-    {file = "lm_eval-0.4.8-py3-none-any.whl", hash = "sha256:2ba377e067affcfcd27b73d6c045f8ce9ff88accd56176d9a86af3c12b0e01f6"},
-    {file = "lm_eval-0.4.8.tar.gz", hash = "sha256:3a7ffff20347315bf2318796b90ec9f7dd819836567085b5f57fdcc8bc450b4d"},
+    {file = "lm_eval-0.4.9.1-py3-none-any.whl", hash = "sha256:315e5a3af7a600c8e4240e059e132376d6582538e1aa6484ccba647f6ea3fae9"},
+    {file = "lm_eval-0.4.9.1.tar.gz", hash = "sha256:e87ea4e9b37ef6fd30c45f0885fab4dfedce2660089a4e8da0b203c0e5b93597"},
 ]
 
 [[package]]
 name = "lm-eval"
-version = "0.4.8"
+version = "0.4.9.1"
 extras = ["api"]
 requires_python = ">=3.9"
 summary = "A framework for evaluating language models"
 groups = ["default"]
 dependencies = [
     "aiohttp",
-    "lm-eval==0.4.8",
+    "lm-eval==0.4.9.1",
     "requests",
     "tenacity",
     "tiktoken",
     "tqdm",
 ]
 files = [
-    {file = "lm_eval-0.4.8-py3-none-any.whl", hash = "sha256:2ba377e067affcfcd27b73d6c045f8ce9ff88accd56176d9a86af3c12b0e01f6"},
-    {file = "lm_eval-0.4.8.tar.gz", hash = "sha256:3a7ffff20347315bf2318796b90ec9f7dd819836567085b5f57fdcc8bc450b4d"},
+    {file = "lm_eval-0.4.9.1-py3-none-any.whl", hash = "sha256:315e5a3af7a600c8e4240e059e132376d6582538e1aa6484ccba647f6ea3fae9"},
+    {file = "lm_eval-0.4.9.1.tar.gz", hash = "sha256:e87ea4e9b37ef6fd30c45f0885fab4dfedce2660089a4e8da0b203c0e5b93597"},
 ]
 
 [[package]]
 name = "lm-eval"
-version = "0.4.8"
+version = "0.4.9.1"
 extras = ["ifeval", "math", "sentencepiece"]
 requires_python = ">=3.9"
 summary = "A framework for evaluating language models"
@@ -747,15 +747,15 @@ dependencies = [
     "antlr4-python3-runtime==4.11",
     "immutabledict",
     "langdetect",
-    "lm-eval==0.4.8",
+    "lm-eval==0.4.9.1",
     "math-verify[antlr4_11_0]",
     "nltk>=3.9.1",
     "sentencepiece>=0.1.98",
     "sympy>=1.12",
 ]
 files = [
-    {file = "lm_eval-0.4.8-py3-none-any.whl", hash = "sha256:2ba377e067affcfcd27b73d6c045f8ce9ff88accd56176d9a86af3c12b0e01f6"},
-    {file = "lm_eval-0.4.8.tar.gz", hash = "sha256:3a7ffff20347315bf2318796b90ec9f7dd819836567085b5f57fdcc8bc450b4d"},
+    {file = "lm_eval-0.4.9.1-py3-none-any.whl", hash = "sha256:315e5a3af7a600c8e4240e059e132376d6582538e1aa6484ccba647f6ea3fae9"},
+    {file = "lm_eval-0.4.9.1.tar.gz", hash = "sha256:e87ea4e9b37ef6fd30c45f0885fab4dfedce2660089a4e8da0b203c0e5b93597"},
 ]
 
 [[package]]
