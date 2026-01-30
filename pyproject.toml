@@ -1,12 +1,12 @@
 [project]
 name = "llm-eval-test"
-version = "0.4.2"
+version = "0.4.3"
 description = "LLM Evaluation Test Tool"
 authors = [
     {name = "Samuel Monson", email = "smonson@redhat.com"},
 ]
 dependencies = [
-    "lm-eval[api]==0.4.9.2",
+    "lm-eval[api]==0.4.10",
     "unitxt==1.22.0",
     "torch>=1.8",
 ]
