@@ -6,7 +6,7 @@ authors = [
     {name = "Samuel Monson", email = "smonson@redhat.com"},
 ]
 dependencies = [
-    "lm-eval[api]==0.4.9.2",
+    "lm-eval[api]==0.4.11",
     "unitxt==1.22.0",
     "torch>=1.8",
 ]
@@ -15,7 +15,7 @@ readme = "README.md"
 
 [project.optional-dependencies]
 leaderboard = [
-    "lm-eval[ifeval,math,sentencepiece]>=0.4.8",
+    "lm-eval[ifeval,math,sentencepiece]>=0.4.11",
 ]
 
 # Use cpu pytorch to avoid downloading cuda
