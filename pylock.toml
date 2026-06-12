@@ -9,34 +9,17 @@ default-groups = ["default"]
 created-by = "pdm"
 [[packages]]
 name = "absl-py"
-version = "2.2.2"
-requires-python = ">=3.8"
+version = "2.4.0"
+requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = []
 
 [[packages]]
-name = "accelerate"
-version = "1.6.0"
-requires-python = ">=3.9.0"
-marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
-
-[packages.tool.pdm]
-dependencies = [
-    "huggingface-hub>=0.21.0",
-    "numpy<3.0.0,>=1.17",
-    "packaging>=20.0",
-    "psutil",
-    "pyyaml",
-    "safetensors>=0.4.3",
-    "torch>=2.0.0",
-]
-
-[[packages]]
 name = "aiohappyeyeballs"
-version = "2.6.1"
-requires-python = ">=3.9"
+version = "2.6.2"
+requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -44,32 +27,43 @@ dependencies = []
 
 [[packages]]
 name = "aiohttp"
-version = "3.11.18"
-requires-python = ">=3.9"
+version = "3.14.1"
+requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = [
-    "aiohappyeyeballs>=2.3.0",
-    "aiosignal>=1.1.2",
+    "aiohappyeyeballs>=2.5.0",
+    "aiosignal>=1.4.0",
     "async-timeout<6.0,>=4.0; python_version < \"3.11\"",
     "attrs>=17.3.0",
     "frozenlist>=1.1.1",
     "multidict<7.0,>=4.5",
     "propcache>=0.2.0",
+    "typing-extensions>=4.4; python_version < \"3.13\"",
     "yarl<2.0,>=1.17.0",
 ]
 
 [[packages]]
 name = "aiosignal"
-version = "1.3.2"
+version = "1.4.0"
 requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = [
     "frozenlist>=1.1.0",
+    "typing-extensions>=4.2; python_version < \"3.13\"",
 ]
+
+[[packages]]
+name = "annotated-doc"
+version = "0.0.4"
+requires-python = ">=3.8"
+marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
+
+[packages.tool.pdm]
+dependencies = []
 
 [[packages]]
 name = "antlr4-python3-runtime"
@@ -82,9 +76,22 @@ dependencies = [
 ]
 
 [[packages]]
+name = "anyio"
+version = "4.14.0"
+requires-python = ">=3.10"
+marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
+
+[packages.tool.pdm]
+dependencies = [
+    "exceptiongroup>=1.0.2; python_version < \"3.11\"",
+    "idna>=2.8",
+    "typing-extensions>=4.5; python_version < \"3.13\"",
+]
+
+[[packages]]
 name = "attrs"
-version = "25.3.0"
-requires-python = ">=3.8"
+version = "26.1.0"
+requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -92,36 +99,7 @@ dependencies = []
 
 [[packages]]
 name = "certifi"
-version = "2025.4.26"
-requires-python = ">=3.6"
-marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
-
-[packages.tool.pdm]
-dependencies = []
-
-[[packages]]
-name = "cffi"
-version = "1.17.1"
-requires-python = ">=3.8"
-marker = "\"default\" in dependency_groups and platform_python_implementation == \"PyPy\" or \"leaderboard\" in extras and platform_python_implementation == \"PyPy\""
-
-[packages.tool.pdm]
-dependencies = [
-    "pycparser",
-]
-
-[[packages]]
-name = "cfgv"
-version = "3.4.0"
-requires-python = ">=3.8"
-marker = "\"dev\" in dependency_groups"
-
-[packages.tool.pdm]
-dependencies = []
-
-[[packages]]
-name = "chardet"
-version = "5.2.0"
+version = "2026.5.20"
 requires-python = ">=3.7"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
@@ -129,8 +107,26 @@ marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 dependencies = []
 
 [[packages]]
+name = "cfgv"
+version = "3.5.0"
+requires-python = ">=3.10"
+marker = "\"dev\" in dependency_groups"
+
+[packages.tool.pdm]
+dependencies = []
+
+[[packages]]
+name = "chardet"
+version = "6.0.0.post1"
+requires-python = ">=3.10"
+marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
+
+[packages.tool.pdm]
+dependencies = []
+
+[[packages]]
 name = "charset-normalizer"
-version = "3.4.2"
+version = "3.4.7"
 requires-python = ">=3.7"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
@@ -139,7 +135,7 @@ dependencies = []
 
 [[packages]]
 name = "click"
-version = "8.2.0"
+version = "8.4.1"
 requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
@@ -159,33 +155,34 @@ dependencies = []
 
 [[packages]]
 name = "dataproperty"
-version = "1.1.0"
+version = "1.1.1"
 requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = [
     "mbstrdecoder<2,>=1.0.0",
-    "typepy[datetime]<2,>=1.3.2",
+    "typepy[datetime]<3,>=1.3.2",
 ]
 
 [[packages]]
 name = "datasets"
-version = "3.6.0"
-requires-python = ">=3.9.0"
+version = "5.0.0"
+requires-python = ">=3.10.0"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = [
-    "dill<0.3.9,>=0.3.0",
+    "dill<0.4.2,>=0.3.0",
     "filelock",
-    "fsspec[http]<=2025.3.0,>=2023.1.0",
-    "huggingface-hub>=0.24.0",
-    "multiprocess<0.70.17",
+    "fsspec[http]<=2026.4.0,>=2023.1.0",
+    "httpx<1.0.0",
+    "huggingface-hub<2.0,>=0.25.0",
+    "multiprocess<0.70.20",
     "numpy>=1.17",
     "packaging",
     "pandas",
-    "pyarrow>=15.0.0",
+    "pyarrow>=21.0.0",
     "pyyaml>=5.1",
     "requests>=2.32.2",
     "tqdm>=4.66.3",
@@ -194,8 +191,8 @@ dependencies = [
 
 [[packages]]
 name = "dill"
-version = "0.3.8"
-requires-python = ">=3.8"
+version = "0.4.1"
+requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -212,7 +209,7 @@ dependencies = []
 
 [[packages]]
 name = "distlib"
-version = "0.3.9"
+version = "0.4.3"
 marker = "\"dev\" in dependency_groups"
 
 [packages.tool.pdm]
@@ -220,7 +217,7 @@ dependencies = []
 
 [[packages]]
 name = "evaluate"
-version = "0.4.3"
+version = "0.4.6"
 requires-python = ">=3.8.0"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
@@ -242,8 +239,8 @@ dependencies = [
 
 [[packages]]
 name = "filelock"
-version = "3.18.0"
-requires-python = ">=3.9"
+version = "3.29.4"
+requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"dev\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -251,7 +248,7 @@ dependencies = []
 
 [[packages]]
 name = "frozenlist"
-version = "1.6.0"
+version = "1.8.0"
 requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
@@ -260,7 +257,16 @@ dependencies = []
 
 [[packages]]
 name = "fsspec"
-version = "2025.3.0"
+version = "2026.4.0"
+requires-python = ">=3.10"
+marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
+
+[packages.tool.pdm]
+dependencies = []
+
+[[packages]]
+name = "h11"
+version = "0.16.0"
 requires-python = ">=3.8"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
@@ -269,35 +275,63 @@ dependencies = []
 
 [[packages]]
 name = "hf-xet"
-version = "1.1.0"
+version = "1.5.1"
 requires-python = ">=3.8"
-marker = "\"default\" in dependency_groups and (platform_machine == \"x86_64\" or platform_machine == \"amd64\" or platform_machine == \"arm64\" or platform_machine == \"aarch64\") or \"leaderboard\" in extras and (platform_machine == \"x86_64\" or platform_machine == \"amd64\" or platform_machine == \"arm64\" or platform_machine == \"aarch64\")"
+marker = "\"default\" in dependency_groups and (platform_machine == \"x86_64\" or platform_machine == \"amd64\" or platform_machine == \"AMD64\" or platform_machine == \"arm64\" or platform_machine == \"aarch64\") or \"leaderboard\" in extras and (platform_machine == \"x86_64\" or platform_machine == \"amd64\" or platform_machine == \"AMD64\" or platform_machine == \"arm64\" or platform_machine == \"aarch64\")"
 
 [packages.tool.pdm]
 dependencies = []
 
 [[packages]]
-name = "huggingface-hub"
-version = "0.31.1"
-requires-python = ">=3.8.0"
+name = "httpcore"
+version = "1.0.9"
+requires-python = ">=3.8"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = [
-    "filelock",
+    "certifi",
+    "h11>=0.16",
+]
+
+[[packages]]
+name = "httpx"
+version = "0.28.1"
+requires-python = ">=3.8"
+marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
+
+[packages.tool.pdm]
+dependencies = [
+    "anyio",
+    "certifi",
+    "httpcore==1.*",
+    "idna",
+]
+
+[[packages]]
+name = "huggingface-hub"
+version = "1.19.0"
+requires-python = ">=3.10.0"
+marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
+
+[packages.tool.pdm]
+dependencies = [
+    "click>=8.4.0",
+    "filelock>=3.10.0",
     "fsspec>=2023.5.0",
-    "hf-xet<2.0.0,>=1.1.0; platform_machine == \"x86_64\" or platform_machine == \"amd64\" or platform_machine == \"arm64\" or platform_machine == \"aarch64\"",
+    "hf-xet<2.0.0,>=1.5.1; platform_machine == \"x86_64\" or platform_machine == \"amd64\" or platform_machine == \"AMD64\" or platform_machine == \"arm64\" or platform_machine == \"aarch64\"",
+    "httpx<1,>=0.23.0",
     "packaging>=20.9",
     "pyyaml>=5.1",
-    "requests",
     "tqdm>=4.42.1",
-    "typing-extensions>=3.7.4.3",
+    "typer<0.26.0,>=0.20.0",
+    "typing-extensions>=4.1.0",
 ]
 
 [[packages]]
 name = "identify"
-version = "2.6.10"
-requires-python = ">=3.9"
+version = "2.6.19"
+requires-python = ">=3.10"
 marker = "\"dev\" in dependency_groups"
 
 [packages.tool.pdm]
@@ -305,8 +339,8 @@ dependencies = []
 
 [[packages]]
 name = "idna"
-version = "3.10"
-requires-python = ">=3.6"
+version = "3.18"
+requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -314,8 +348,8 @@ dependencies = []
 
 [[packages]]
 name = "immutabledict"
-version = "4.2.1"
-requires-python = ">=3.8"
+version = "4.3.1"
+requires-python = "<4.0,>=3.8"
 marker = "\"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -334,7 +368,7 @@ dependencies = [
 
 [[packages]]
 name = "joblib"
-version = "1.5.0"
+version = "1.5.3"
 requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
@@ -364,7 +398,7 @@ dependencies = [
 
 [[packages]]
 name = "latex2sympy2-extended"
-version = "1.10.1"
+version = "1.11.0"
 requires-python = ">=3.10"
 marker = "\"leaderboard\" in extras"
 
@@ -376,46 +410,52 @@ dependencies = [
 
 [[packages]]
 name = "lm-eval"
-version = "0.4.9.2"
+version = "0.4.11"
 requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = [
-    "accelerate>=0.26.0",
     "datasets>=2.16.0",
     "dill",
-    "evaluate",
     "evaluate>=0.4.0",
+    "jinja2",
     "jsonlines",
     "more-itertools",
-    "numexpr",
-    "peft>=0.2.0",
-    "pybind11>=2.6.2",
+    "numpy",
     "pytablewriter",
     "rouge-score>=0.0.4",
     "sacrebleu>=1.5.0",
     "scikit-learn>=0.24.1",
     "sqlitedict",
-    "torch>=1.8",
-    "tqdm-multiprocess",
-    "transformers>=4.1",
+    "typing-extensions",
     "word2number",
     "zstandard",
 ]
 
 [[packages]]
 name = "lxml"
-version = "5.4.0"
-requires-python = ">=3.6"
+version = "6.1.1"
+requires-python = ">=3.8"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = []
 
 [[packages]]
+name = "markdown-it-py"
+version = "4.2.0"
+requires-python = ">=3.10"
+marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
+
+[packages.tool.pdm]
+dependencies = [
+    "mdurl~=0.1",
+]
+
+[[packages]]
 name = "markupsafe"
-version = "3.0.2"
+version = "3.0.3"
 requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
@@ -424,30 +464,39 @@ dependencies = []
 
 [[packages]]
 name = "math-verify"
-version = "0.7.0"
+version = "0.9.0"
 requires-python = ">=3.10"
 marker = "\"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = [
-    "latex2sympy2-extended==1.10.1",
+    "latex2sympy2-extended==1.11.0",
 ]
 
 [[packages]]
 name = "mbstrdecoder"
-version = "1.1.4"
-requires-python = ">=3.9"
+version = "1.1.5"
+requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = [
-    "chardet<6,>=3.0.4",
+    "chardet<7,>=3.0.4",
 ]
 
 [[packages]]
+name = "mdurl"
+version = "0.1.2"
+requires-python = ">=3.7"
+marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
+
+[packages.tool.pdm]
+dependencies = []
+
+[[packages]]
 name = "more-itertools"
-version = "10.7.0"
-requires-python = ">=3.9"
+version = "11.1.0"
+requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -463,7 +512,7 @@ dependencies = []
 
 [[packages]]
 name = "multidict"
-version = "6.4.3"
+version = "6.7.1"
 requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
@@ -474,18 +523,18 @@ dependencies = [
 
 [[packages]]
 name = "multiprocess"
-version = "0.70.16"
-requires-python = ">=3.8"
+version = "0.70.19"
+requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = [
-    "dill>=0.3.8",
+    "dill>=0.4.1",
 ]
 
 [[packages]]
-name = "networkx"
-version = "3.4.2"
+name = "narwhals"
+version = "2.22.1"
 requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
@@ -493,9 +542,18 @@ marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 dependencies = []
 
 [[packages]]
+name = "networkx"
+version = "3.6"
+requires-python = ">=3.11"
+marker = "\"default\" in dependency_groups"
+
+[packages.tool.pdm]
+dependencies = []
+
+[[packages]]
 name = "nltk"
-version = "3.9.1"
-requires-python = ">=3.8"
+version = "3.9.4"
+requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -508,7 +566,7 @@ dependencies = [
 
 [[packages]]
 name = "nodeenv"
-version = "1.9.1"
+version = "1.10.0"
 requires-python = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
 marker = "\"dev\" in dependency_groups"
 
@@ -516,20 +574,9 @@ marker = "\"dev\" in dependency_groups"
 dependencies = []
 
 [[packages]]
-name = "numexpr"
-version = "2.10.2"
-requires-python = ">=3.9"
-marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
-
-[packages.tool.pdm]
-dependencies = [
-    "numpy>=1.23.0",
-]
-
-[[packages]]
 name = "numpy"
-version = "2.2.5"
-requires-python = ">=3.10"
+version = "2.4.6"
+requires-python = ">=3.11"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -537,7 +584,7 @@ dependencies = []
 
 [[packages]]
 name = "packaging"
-version = "25.0"
+version = "26.2"
 requires-python = ">=3.8"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
@@ -546,23 +593,22 @@ dependencies = []
 
 [[packages]]
 name = "pandas"
-version = "2.2.3"
-requires-python = ">=3.9"
+version = "3.0.3"
+requires-python = ">=3.11"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = [
-    "numpy>=1.22.4; python_version < \"3.11\"",
-    "numpy>=1.23.2; python_version == \"3.11\"",
-    "numpy>=1.26.0; python_version >= \"3.12\"",
+    "numpy>=1.26.0; python_version < \"3.14\"",
+    "numpy>=2.3.3; python_version >= \"3.14\"",
     "python-dateutil>=2.8.2",
-    "pytz>=2020.1",
-    "tzdata>=2022.7",
+    "tzdata; sys_platform == \"emscripten\"",
+    "tzdata; sys_platform == \"win32\"",
 ]
 
 [[packages]]
 name = "pathvalidate"
-version = "3.2.3"
+version = "3.3.1"
 requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
@@ -570,29 +616,9 @@ marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 dependencies = []
 
 [[packages]]
-name = "peft"
-version = "0.15.2"
-requires-python = ">=3.9.0"
-marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
-
-[packages.tool.pdm]
-dependencies = [
-    "accelerate>=0.21.0",
-    "huggingface-hub>=0.25.0",
-    "numpy>=1.17",
-    "packaging>=20.0",
-    "psutil",
-    "pyyaml",
-    "safetensors",
-    "torch>=1.13.0",
-    "tqdm",
-    "transformers",
-]
-
-[[packages]]
 name = "platformdirs"
-version = "4.3.8"
-requires-python = ">=3.9"
+version = "4.10.0"
+requires-python = ">=3.10"
 marker = "\"dev\" in dependency_groups"
 
 [packages.tool.pdm]
@@ -600,7 +626,7 @@ dependencies = []
 
 [[packages]]
 name = "portalocker"
-version = "3.1.1"
+version = "3.2.0"
 requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
@@ -611,8 +637,8 @@ dependencies = [
 
 [[packages]]
 name = "pre-commit"
-version = "4.2.0"
-requires-python = ">=3.9"
+version = "4.6.0"
+requires-python = ">=3.10"
 marker = "\"dev\" in dependency_groups"
 
 [packages.tool.pdm]
@@ -626,17 +652,8 @@ dependencies = [
 
 [[packages]]
 name = "propcache"
-version = "0.3.1"
-requires-python = ">=3.9"
-marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
-
-[packages.tool.pdm]
-dependencies = []
-
-[[packages]]
-name = "psutil"
-version = "7.0.0"
-requires-python = ">=3.6"
+version = "0.5.2"
+requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -644,27 +661,18 @@ dependencies = []
 
 [[packages]]
 name = "pyarrow"
-version = "20.0.0"
+version = "24.0.0"
+requires-python = ">=3.10"
+marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
+
+[packages.tool.pdm]
+dependencies = []
+
+[[packages]]
+name = "pygments"
+version = "2.20.0"
 requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
-
-[packages.tool.pdm]
-dependencies = []
-
-[[packages]]
-name = "pybind11"
-version = "2.13.6"
-requires-python = ">=3.7"
-marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
-
-[packages.tool.pdm]
-dependencies = []
-
-[[packages]]
-name = "pycparser"
-version = "2.22"
-requires-python = ">=3.8"
-marker = "\"default\" in dependency_groups and platform_python_implementation == \"PyPy\" or \"leaderboard\" in extras and platform_python_implementation == \"PyPy\""
 
 [packages.tool.pdm]
 dependencies = []
@@ -698,8 +706,20 @@ dependencies = [
 ]
 
 [[packages]]
+name = "python-discovery"
+version = "1.4.2"
+requires-python = ">=3.8"
+marker = "\"dev\" in dependency_groups"
+
+[packages.tool.pdm]
+dependencies = [
+    "filelock>=3.15.4",
+    "platformdirs<5,>=4.3.6",
+]
+
+[[packages]]
 name = "pytz"
-version = "2025.2"
+version = "2026.2"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -707,7 +727,8 @@ dependencies = []
 
 [[packages]]
 name = "pywin32"
-version = "310"
+version = "312"
+requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups and platform_system == \"Windows\" or \"leaderboard\" in extras and platform_system == \"Windows\""
 
 [packages.tool.pdm]
@@ -715,7 +736,7 @@ dependencies = []
 
 [[packages]]
 name = "pyyaml"
-version = "6.0.2"
+version = "6.0.3"
 requires-python = ">=3.8"
 marker = "\"default\" in dependency_groups or \"dev\" in dependency_groups or \"leaderboard\" in extras"
 
@@ -724,8 +745,8 @@ dependencies = []
 
 [[packages]]
 name = "regex"
-version = "2024.11.6"
-requires-python = ">=3.8"
+version = "2026.5.9"
+requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -733,16 +754,28 @@ dependencies = []
 
 [[packages]]
 name = "requests"
-version = "2.32.3"
-requires-python = ">=3.8"
+version = "2.34.2"
+requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = [
-    "certifi>=2017.4.17",
+    "certifi>=2023.5.7",
     "charset-normalizer<4,>=2",
     "idna<4,>=2.5",
-    "urllib3<3,>=1.21.1",
+    "urllib3<3,>=1.26",
+]
+
+[[packages]]
+name = "rich"
+version = "15.0.0"
+requires-python = ">=3.9.0"
+marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
+
+[packages.tool.pdm]
+dependencies = [
+    "markdown-it-py>=2.2.0",
+    "pygments<3.0.0,>=2.13.0",
 ]
 
 [[packages]]
@@ -761,7 +794,7 @@ dependencies = [
 
 [[packages]]
 name = "ruff"
-version = "0.11.9"
+version = "0.15.17"
 requires-python = ">=3.7"
 marker = "\"dev\" in dependency_groups"
 
@@ -770,8 +803,8 @@ dependencies = []
 
 [[packages]]
 name = "sacrebleu"
-version = "2.5.1"
-requires-python = ">=3.8"
+version = "2.6.0"
+requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -785,42 +818,35 @@ dependencies = [
 ]
 
 [[packages]]
-name = "safetensors"
-version = "0.5.3"
-requires-python = ">=3.7"
-marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
-
-[packages.tool.pdm]
-dependencies = []
-
-[[packages]]
 name = "scikit-learn"
-version = "1.6.1"
-requires-python = ">=3.9"
+version = "1.9.0"
+requires-python = ">=3.11"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = [
-    "joblib>=1.2.0",
-    "numpy>=1.19.5",
-    "scipy>=1.6.0",
-    "threadpoolctl>=3.1.0",
+    "joblib>=1.4.0",
+    "narwhals>=2.0.1",
+    "numpy>=1.24.1",
+    "scipy>=1.10.0",
+    "threadpoolctl>=3.5.0",
 ]
 
 [[packages]]
 name = "scipy"
-version = "1.15.3"
-requires-python = ">=3.10"
+version = "1.17.1"
+requires-python = ">=3.11"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = [
-    "numpy<2.5,>=1.23.5",
+    "numpy<2.7,>=1.26.4",
 ]
 
 [[packages]]
 name = "sentencepiece"
-version = "0.2.0"
+version = "0.2.1"
+requires-python = ">=3.9"
 marker = "\"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -828,8 +854,17 @@ dependencies = []
 
 [[packages]]
 name = "setuptools"
-version = "80.4.0"
+version = "81.0.0"
 requires-python = ">=3.9"
+marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
+
+[packages.tool.pdm]
+dependencies = []
+
+[[packages]]
+name = "shellingham"
+version = "1.5.4"
+requires-python = ">=3.7"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -865,20 +900,20 @@ dependencies = [
 
 [[packages]]
 name = "tabledata"
-version = "1.3.4"
-requires-python = ">=3.9"
+version = "1.3.5"
+requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = [
-    "DataProperty<2,>=1.0.1",
-    "typepy<2,>=1.2.0",
+    "DataProperty<2,>=1.0.2",
+    "typepy<3,>=1.2.0",
 ]
 
 [[packages]]
 name = "tabulate"
-version = "0.9.0"
-requires-python = ">=3.7"
+version = "0.10.0"
+requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -895,8 +930,8 @@ dependencies = []
 
 [[packages]]
 name = "tenacity"
-version = "9.1.2"
-requires-python = ">=3.9"
+version = "9.1.4"
+requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups"
 
 [packages.tool.pdm]
@@ -913,90 +948,48 @@ dependencies = []
 
 [[packages]]
 name = "tiktoken"
-version = "0.9.0"
+version = "0.13.0"
 requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups"
 
 [packages.tool.pdm]
 dependencies = [
-    "regex>=2022.1.18",
-    "requests>=2.26.0",
-]
-
-[[packages]]
-name = "tokenizers"
-version = "0.21.1"
-requires-python = ">=3.9"
-marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
-
-[packages.tool.pdm]
-dependencies = [
-    "huggingface-hub<1.0,>=0.16.4",
+    "regex",
+    "requests",
 ]
 
 [[packages]]
 name = "torch"
-version = "2.7.0"
-requires-python = ">=3.9.0"
-marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
+version = "2.12.0"
+requires-python = ">=3.10"
+marker = "\"default\" in dependency_groups"
 
 [packages.tool.pdm]
 dependencies = [
     "filelock",
-    "fsspec",
+    "fsspec>=0.8.5",
     "jinja2",
-    "networkx",
-    "setuptools; python_version >= \"3.12\"",
+    "networkx>=2.5.1",
+    "setuptools<82",
     "sympy>=1.13.3",
     "typing-extensions>=4.10.0",
 ]
 
 [[packages]]
 name = "tqdm"
-version = "4.67.1"
+version = "4.68.2"
 requires-python = ">=3.7"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
 dependencies = [
     "colorama; platform_system == \"Windows\"",
-]
-
-[[packages]]
-name = "tqdm-multiprocess"
-version = "0.0.11"
-requires-python = ">=3.6"
-marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
-
-[packages.tool.pdm]
-dependencies = [
-    "colorama",
-    "tqdm",
-]
-
-[[packages]]
-name = "transformers"
-version = "4.51.3"
-requires-python = ">=3.9.0"
-marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
-
-[packages.tool.pdm]
-dependencies = [
-    "filelock",
-    "huggingface-hub<1.0,>=0.30.0",
-    "numpy>=1.17",
-    "packaging>=20.0",
-    "pyyaml>=5.1",
-    "regex!=2019.12.17",
-    "requests",
-    "safetensors>=0.4.3",
-    "tokenizers<0.22,>=0.21",
-    "tqdm>=4.27",
+    "importlib-metadata; python_version < \"3.8\"",
 ]
 
 [[packages]]
 name = "typepy"
-version = "1.3.4"
+version = "1.3.5"
 requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
@@ -1006,9 +999,23 @@ dependencies = [
 ]
 
 [[packages]]
+name = "typer"
+version = "0.25.1"
+requires-python = ">=3.10"
+marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
+
+[packages.tool.pdm]
+dependencies = [
+    "annotated-doc>=0.0.2",
+    "click>=8.2.1",
+    "rich>=13.8.0",
+    "shellingham>=1.3.0",
+]
+
+[[packages]]
 name = "typing-extensions"
-version = "4.13.2"
-requires-python = ">=3.8"
+version = "4.15.0"
+requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -1016,9 +1023,9 @@ dependencies = []
 
 [[packages]]
 name = "tzdata"
-version = "2025.2"
+version = "2026.2"
 requires-python = ">=2"
-marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
+marker = "\"default\" in dependency_groups and (sys_platform == \"win32\" or sys_platform == \"emscripten\") or \"leaderboard\" in extras and (sys_platform == \"win32\" or sys_platform == \"emscripten\")"
 
 [packages.tool.pdm]
 dependencies = []
@@ -1039,8 +1046,8 @@ dependencies = [
 
 [[packages]]
 name = "urllib3"
-version = "2.4.0"
-requires-python = ">=3.9"
+version = "2.7.0"
+requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -1048,16 +1055,18 @@ dependencies = []
 
 [[packages]]
 name = "virtualenv"
-version = "20.31.2"
-requires-python = ">=3.8"
+version = "21.5.0"
+requires-python = ">=3.9"
 marker = "\"dev\" in dependency_groups"
 
 [packages.tool.pdm]
 dependencies = [
     "distlib<1,>=0.3.7",
-    "filelock<4,>=3.12.2",
-    "importlib-metadata>=6.6; python_version < \"3.8\"",
+    "filelock<4,>=3.24.2; python_version >= \"3.10\"",
+    "filelock<=3.19.1,>=3.16.1; python_version < \"3.10\"",
     "platformdirs<5,>=3.9.1",
+    "python-discovery>=1.4.2",
+    "typing-extensions>=4.13.2; python_version < \"3.11\"",
 ]
 
 [[packages]]
@@ -1070,8 +1079,8 @@ dependencies = []
 
 [[packages]]
 name = "xxhash"
-version = "3.5.0"
-requires-python = ">=3.7"
+version = "3.7.0"
+requires-python = ">=3.8"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -1079,8 +1088,8 @@ dependencies = []
 
 [[packages]]
 name = "yarl"
-version = "1.20.0"
-requires-python = ">=3.9"
+version = "1.24.2"
+requires-python = ">=3.10"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
@@ -1092,17 +1101,15 @@ dependencies = [
 
 [[packages]]
 name = "zstandard"
-version = "0.23.0"
-requires-python = ">=3.8"
+version = "0.25.0"
+requires-python = ">=3.9"
 marker = "\"default\" in dependency_groups or \"leaderboard\" in extras"
 
 [packages.tool.pdm]
-dependencies = [
-    "cffi>=1.17; platform_python_implementation == \"PyPy\"",
-]
+dependencies = []
 
 [tool.pdm]
-hashes = {sha256 = "d6919351bdf520468cdb8758e0d3f74fa76f61f88a1ef245a989a7a110f11f40"}
+hashes = {sha256 = "341f3383828050ff60d7bfb294e82147177d49b3076c20a6853b77dd4aa9685a"}
 
 [[tool.pdm.targets]]
 requires_python = "~=3.11"
